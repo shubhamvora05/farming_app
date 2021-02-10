@@ -39,7 +39,9 @@
         <a class="nav-link disabled" href="http://127.0.0.1:8000/management/">Management</a>
       </li>
     </ul>
-{% if user.is_authenticated %}
+
+{% comment %} //chekcking user is authenticated or not {% endcomment %}
+{% if user.is_authenticated %}   
 <ul class="navbar-nav ml-auto">
 <li class="nav-item dropdown">
  <span class="mr-2" >{{request.user}}</span>
@@ -49,8 +51,9 @@
       </li>
       </ul>
       </div>
-{% else %}
+{% else %}  
   <!-- Button to  trigger Login modal -->
+
   <div class="ml-auto">
 <button type="button" class="btn btn-success mr-2" data-toggle="modal" data-target="#loginModal">
 Login
@@ -64,7 +67,9 @@ SignUp
   </div>
 </nav>
 
+
 <!-- SignUp Modal -->
+
 <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModal" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -112,10 +117,11 @@ SignUp
   </div>
 </div>
 
-
-
-{% block body %}  {% endblock body %}
-
+{% if user.is_authenticated %} 
+{% block body %}{% endblock %}
+{%else%}
+{% block nonUser%}{% endblock %}
+{%endif%}
 <!-- Login Modal -->
 <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModal" aria-hidden="true">
   <div class="modal-dialog">
@@ -142,6 +148,9 @@ SignUp
       </div>
        <div class="modal-footer">
       </div>
+
+{% comment %} body block {% endcomment %}
+
 
 
 

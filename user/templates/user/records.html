@@ -1,3 +1,72 @@
 {% extends "user/base.html" %}
-{% block title %}user{% endblock %}
-{% block body %}<h1>you are on records</h1>{% endblock  %}
+{% block title %}userRecords{% endblock %}
+
+{% comment %} //This blocks show to user only if it comes after login {% endcomment %}
+
+{% block body %}
+
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-9 mr-auto">
+      <h3>Your all approved service are here</h3>
+    </div>
+    <div class="col-3 ml-auto">
+<button type="button" class="btn btn-success mr-2 " data-toggle="modal" data-target="#RecordModal">
+Request New Service
+</button>
+    </div>
+  </div>
+</div>
+
+
+{% comment %} userRecords modal {% endcomment %}
+
+<div class="modal fade" id="RecordModal" tabindex="-1" aria-labelledby="RecordModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="RecordModalTitle">Add new request here<p>If you have apply already once you need not to fill form again.</p></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action= "/user/records" method='post'>
+  <div class="form-group">
+    <label for="fname">First Name</label>
+    <input type="text" class="form-control" id="fname" name="fname" placeholder="Enter Your First Name">
+  </div>
+  <div class="form-group">
+    <label for="lname">Last Name</label>
+    <input type="text" class="form-control" id="lname" name="lname" placeholder="Enter Your Last Name">
+  </div>
+  <div class="form-group">
+    <label for="email">Email address</label>
+    <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
+  </div>
+  <div class="form-group">
+    <label for="pass1">Choose a password</label>
+    <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Choose Your Password">
+  </div>
+  <div class="form-group">
+    <label for="pass2">Confirm Password</label>
+    <input type="password" class="form-control" id="pass2" name="pass2" placeholder="Enter your password again">
+  </div>
+ 
+
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock  %}
+
+
+{% comment %} //if user comes on this page without login this will show them. {% endcomment %}
+
+{% block nonUser%}<h3>please signup or login</h3>{% endblock  %}
