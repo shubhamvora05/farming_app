@@ -5,7 +5,7 @@ from django.utils.timezone import now
 
 # Create your models here.
 class UserRecord(models.Model):
-    userId=models.AutoField(primary_key=True)
+    recordId=models.AutoField(primary_key=True)
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     name=models.CharField(max_length=50, default="")
     mobileNo=models.CharField(max_length=12,default="")
@@ -13,7 +13,7 @@ class UserRecord(models.Model):
     farmArea=models.IntegerField(default=0)
     soilType=models.TextField(default="")
     moneyDemand=models.IntegerField(default=0)
-    farmImage=models.ImageField(upload_to='user/farm',default="")
+    farmImage=models.ImageField(upload_to='user/farm/')
     extraComment=models.TextField()
     timestamp= models.DateTimeField(default=now)
 

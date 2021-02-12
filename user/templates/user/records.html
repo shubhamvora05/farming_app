@@ -33,24 +33,45 @@ Request New Service
       <div class="modal-body">
         <form action= "/user/records" method='post'>
   <div class="form-group">
-    <label for="fname">First Name</label>
-    <input type="text" class="form-control" id="fname" name="fname" placeholder="Enter Your First Name">
+    <label for="fname">Full Name</label>
+    <input type="text" class="form-control" id="fname" name="fname" placeholder="Enter Your full Name" required>
   </div>
   <div class="form-group">
-    <label for="lname">Last Name</label>
-    <input type="text" class="form-control" id="lname" name="lname" placeholder="Enter Your Last Name">
+    <label for="phone">Phone number</label><br>
+    <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" size="59" placeholder="Enter Your Phone number" required>
   </div>
-  <div class="form-group">
-    <label for="email">Email address</label>
-    <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
+   <div class="form-group">
+   <label for="faddress">Farm address</label><br>
+    <input type="text" id="faddress" name="faddress" placeholder="Enter Your farm address" size="59" required>
   </div>
-  <div class="form-group">
-    <label for="pass1">Choose a password</label>
-    <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Choose Your Password">
+   <div class="form-group">
+   <label for="farea">Farm area</label><br>
+   <input type="number" id="farea" name="farea"  placeholder="Enter Your farm area in hector" size="59" required>
   </div>
-  <div class="form-group">
-    <label for="pass2">Confirm Password</label>
-    <input type="password" class="form-control" id="pass2" name="pass2" placeholder="Enter your password again">
+
+   <div class="form-group">
+   <label for="soilType">Farm area</label><br>
+<select id="soilType" name="soilType" >
+  <option value="andySoil">Sandy soil</option>
+  <option value="siltSoil">Silt Soil</option>
+  <option value="claySoil">Clay Soil</option>
+  <option value="loamySoil">Loamy Soil</option>
+</select>
+  </div>
+
+   <div class="form-group">
+   <label for="money">Money demand</label><br>
+    <input type="number" id="money" name="money"  placeholder="How much money you will demand for 1 year" size="59" required>
+  </div>
+
+  <div class="form-group"><br>
+   <label for="farmImage">Multiple Farm Images</label><br>
+    <input type="file" id="farmImage" name="farmImage" size="59" required multiple>
+  </div>
+
+   <div class="form-group">
+   <label for="extracomment">Your suggestions</label>
+   <textarea id="extracomment" name="extracomment" rows="5" cols="59" placeholder="Please, type your suggestion or extra comment"></textarea>
   </div>
  
 

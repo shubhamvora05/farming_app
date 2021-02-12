@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from django.contrib.auth  import authenticate,  login, logout
-# Create your views here.
+from user.models import UserRecord
 from django.http import HttpResponse
 
 # Create your views here.
@@ -9,6 +9,18 @@ def userHome(request):
     return render(request,'user/home.html')
 
 def userRecords(request):
+    if request.method == "POST":
+        user=request.user
+        name=request.POST.get('fname')
+        phone=request.POST.get('phone')
+        farmAdress=request.POST.get('faddress')
+        farmArea=request.POST.get('farea')
+        soilType=request.POST.get('soilType')
+        money=request.POST.get('money')
+        farmImage=request.POST.get('farmImage')
+        extraComment=request.POST.get('extracomment')
+        userRecord=UserRecord(user=user, name=name, mobileNo=phone,farmaddress=farmAdress,farmArea=farmArea, soilType=soilType, moneyDemand=money,farmImage=farmImage, extraComment=extraComment)
+        userRecord.save()
     return render(request,'user/records.html')
 
 def userLogin(request):
