@@ -28,4 +28,4 @@ urlpatterns = [
     path("",views.index,name="Home"),
     path("user/",include('user.urls')),  
     path("management/",include('management.urls')),
-] + static (settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)  #setting up static directory
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  #setting up static directory

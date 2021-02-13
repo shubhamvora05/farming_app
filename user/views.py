@@ -9,6 +9,15 @@ def userHome(request):
     return render(request,'user/home.html')
 
 def userRecords(request):
+    if request.user.is_authenticated:
+        records= UserRecord.objects.filter(user=request.user)
+        bool="true"
+        Allrecords={'records':records,'bool':bool} 
+    else :
+        bool="false"
+        Allrecords={'records':"",'bool':bool}
+    
+
     if request.method == "POST":
         user=request.user
         name=request.POST.get('fname')
@@ -21,7 +30,7 @@ def userRecords(request):
         extraComment=request.POST.get('extracomment')
         userRecord=UserRecord(user=user, name=name, mobileNo=phone,farmaddress=farmAdress,farmArea=farmArea, soilType=soilType, moneyDemand=money,farmImage=farmImage, extraComment=extraComment)
         userRecord.save()
-    return render(request,'user/records.html')
+    return render(request,'user/records.html',Allrecords)
 
 def userLogin(request):
     if request.method=="POST":

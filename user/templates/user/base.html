@@ -117,11 +117,10 @@ SignUp
   </div>
 </div>
 
-{% if user.is_authenticated %} 
+
 {% block body %}{% endblock %}
-{%else%}
-{% block nonUser%}{% endblock %}
-{%endif%}
+
+
 <!-- Login Modal -->
 <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModal" aria-hidden="true">
   <div class="modal-dialog">

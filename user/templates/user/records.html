@@ -3,7 +3,10 @@
 
 {% comment %} //This blocks show to user only if it comes after login {% endcomment %}
 
+
 {% block body %}
+
+{% ifequal bool "true"  %}
 
 <div class="container mt-3">
   <div class="row">
@@ -85,9 +88,22 @@ Request New Service
   </div>
 </div>
 
+ {% for record in records %}
+    <div class="row my-3">
+        <div class="col-md-1  ">
+       <h1>{{record.name}}</h1>
+        </div>
+        <div class="col-md-11 "> 
+        <b> {{record.farmaddress}} </b> 
+        <div>   {{record.farmImage}} </div>
+    </div>
+    </div>
+    {% endfor %}
+{%endifequal%}
+{% ifequal bool "false"  %}
+ <p>you are not authenticated!!! please, login or signup</p>
+{% endifequal %}
 {% endblock  %}
 
 
-{% comment %} //if user comes on this page without login this will show them. {% endcomment %}
 
-{% block nonUser%}<h3>please signup or login</h3>{% endblock  %}

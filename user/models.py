@@ -13,7 +13,7 @@ class UserRecord(models.Model):
     farmArea=models.IntegerField(default=0)
     soilType=models.TextField(default="")
     moneyDemand=models.IntegerField(default=0)
-    farmImage=models.ImageField(upload_to='user/farm/')
+    farmImage=models.ImageField(upload_to='user/farm/',default="")
     extraComment=models.TextField()
     timestamp= models.DateTimeField(default=now)
 
