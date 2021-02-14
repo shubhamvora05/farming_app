@@ -34,8 +34,8 @@ Request New Service
         </button>
       </div>
       <div class="modal-body">
-        <form action= "/user/records" method='post'>
-  <div class="form-group">
+        <form action= "/user/records" method='post' enctype="multipart/form-data">
+  {% comment %} <div class="form-group">
     <label for="fname">Full Name</label>
     <input type="text" class="form-control" id="fname" name="fname" placeholder="Enter Your full Name" required>
   </div>
@@ -55,7 +55,7 @@ Request New Service
    <div class="form-group">
    <label for="soilType">Farm area</label><br>
 <select id="soilType" name="soilType" >
-  <option value="andySoil">Sandy soil</option>
+  <option value="sandySoil">Sandy soil</option>
   <option value="siltSoil">Silt Soil</option>
   <option value="claySoil">Clay Soil</option>
   <option value="loamySoil">Loamy Soil</option>
@@ -70,14 +70,14 @@ Request New Service
   <div class="form-group"><br>
    <label for="farmImage">Multiple Farm Images</label><br>
     <input type="file" id="farmImage" name="farmImage" size="59" required multiple>
-  </div>
+  </div> 
 
    <div class="form-group">
    <label for="extracomment">Your suggestions</label>
    <textarea id="extracomment" name="extracomment" rows="5" cols="59" placeholder="Please, type your suggestion or extra comment"></textarea>
   </div>
- 
-
+  {% endcomment %}
+      {{ form.as_p }}
         {% csrf_token %}
         <button type="submit" class="btn btn-primary">Submit</button>
 </form>
@@ -95,7 +95,7 @@ Request New Service
         </div>
         <div class="col-md-11 "> 
         <b> {{record.farmaddress}} </b> 
-        <div>   {{record.farmImage}} </div>
+        <img src="/media/{{record.farmImage}}" width="100px" height="100px" alt=""> 
     </div>
     </div>
     {% endfor %}

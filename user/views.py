@@ -2,34 +2,30 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from django.contrib.auth  import authenticate,  login, logout
 from user.models import UserRecord
+from user.forms import UserRecordForm
 from django.http import HttpResponse
 
 # Create your views here.
 def userHome(request):
     return render(request,'user/home.html')
 
-def userRecords(request):
+def userRecords(request,):
     if request.user.is_authenticated:
         records= UserRecord.objects.filter(user=request.user)
         bool="true"
-        Allrecords={'records':records,'bool':bool} 
+        form = UserRecordForm()
+        Allrecords={'records':records,'bool':bool,'form': form} 
     else :
         bool="false"
         Allrecords={'records':"",'bool':bool}
     
 
     if request.method == "POST":
-        user=request.user
-        name=request.POST.get('fname')
-        phone=request.POST.get('phone')
-        farmAdress=request.POST.get('faddress')
-        farmArea=request.POST.get('farea')
-        soilType=request.POST.get('soilType')
-        money=request.POST.get('money')
-        farmImage=request.POST.get('farmImage')
-        extraComment=request.POST.get('extracomment')
-        userRecord=UserRecord(user=user, name=name, mobileNo=phone,farmaddress=farmAdress,farmArea=farmArea, soilType=soilType, moneyDemand=money,farmImage=farmImage, extraComment=extraComment)
-        userRecord.save()
+        form = UserRecordForm(request.POST, request.FILES)
+        if form.is_valid():
+            userRecord= form.save(commit=False)
+            userRecord.user = request.user
+            form.save()
     return render(request,'user/records.html',Allrecords)
 
 def userLogin(request):
