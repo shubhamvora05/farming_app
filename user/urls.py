@@ -12,6 +12,7 @@ urlpatterns = [
     path("signup",views.userSignup,name='userSignup'),
 
     path("records",views.userRecords,name='userRecords'),
+    path("contactus",views.contactUs,name='contactus'),
     
     #password reset urls
     path("reset_password/",auth_views.PasswordResetView.as_view(template_name="user/reset_password.html"), name="reset_password"),

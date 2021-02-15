@@ -16,6 +16,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="">
+         <style>
+        {% block style %} {% endblock %}
+    </style>
     </head>
     <body>
        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -26,17 +29,17 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="http://127.0.0.1:8000/">Home<span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="http://127.0.0.1:8000/pricing">Pricing</a>
+        <a class="nav-link" href="#">Pricing</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="http://127.0.0.1:8000/user/">User</a>
+        <a class="nav-link" href="/user/">User</a>
       </li>
       
       <li class="nav-item">
-        <a class="nav-link disabled" href="http://127.0.0.1:8000/management/">Management</a>
+        <a class="nav-link disabled" href="/user/contactus">Contactus</a>
       </li>
     </ul>
 

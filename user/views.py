@@ -1,13 +1,14 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from django.contrib.auth  import authenticate,  login, logout
-from user.models import UserRecord
+from user.models import UserRecord,ContactUs
 from user.forms import UserRecordForm
 from django.http import HttpResponse
 
 # Create your views here.
 def userHome(request):
-    return render(request,'user/home.html')
+    response = redirect('/user/records')
+    return response
 
 def userRecords(request,):
     if request.user.is_authenticated:
@@ -81,3 +82,15 @@ def userSignup(request):
 
     else:
         return HttpResponse("404 - Not found")
+
+
+def contactUs(request):
+    if request.method == "POST":
+        name = request.POST.get('txtName','')
+        email = request.POST.get('txtEmail','')
+        phone = request.POST.get('txtPhone', '')
+        msg = request.POST.get('txtMsg', '')
+        print(name,email,phone,msg)
+        contact = ContactUs(name=name,email=email,phone=phone,desc=msg)
+        contact.save()
+    return render(request,'user/contactus.html')

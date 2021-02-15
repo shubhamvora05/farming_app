@@ -1,5 +1,7 @@
 from django.contrib import admin
-from user.models import UserRecord
+from user.models import UserRecord,ContactUs
 
 # Register your models here.
-admin.site.register(UserRecord)
+models = (UserRecord,ContactUs)
+for m in models:
+   admin.site.register(m)

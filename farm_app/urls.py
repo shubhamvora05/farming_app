@@ -24,8 +24,15 @@ from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
+    #admin url
     path('admin/', admin.site.urls),
+ 
+    #home setting
     path("",views.index,name="Home"),
+    path("",views.index,name="Home"),
+    path("aboutUs/",views.aboutUs,name="aboutUs"),
+
+    #app url setting
     path("user/",include('user.urls')),  
     path("management/",include('management.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  #setting up static directory
