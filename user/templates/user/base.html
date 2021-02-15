@@ -42,12 +42,17 @@
 
 {% comment %} //chekcking user is authenticated or not {% endcomment %}
 {% if user.is_authenticated %}   
-<ul class="navbar-nav ml-auto">
-<li class="nav-item dropdown">
- <span class="mr-2" >{{request.user}}</span>
-<button type="button" class="btn btn-success mr-2" >
- <a class="dropdown-item" href="/user/logout">Logout</a>
-</button>        
+<ul class="navbar-nav ml-auto mr-5">
+
+     <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+         <span class="dropdown-item" >{{request.user}}</span>
+         <a class="dropdown-item" href="/user/reset_password/">Change Password</a>
+          <a class="dropdown-item" href="/user/logout">Logout</a>
+        </div>
       </li>
       </ul>
       </div>
@@ -144,6 +149,7 @@ SignUp
  {% csrf_token %}
         <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+<a href="reset_password/">Forgot password?</a>
       </div>
        <div class="modal-footer">
       </div>
