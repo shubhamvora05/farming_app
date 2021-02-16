@@ -49,10 +49,11 @@
 
      <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
+         {{request.user}}
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-         <span class="dropdown-item" >{{request.user}}</span>
+         <span class="dropdown-item" ></span>
+         <a class="dropdown-item" href="/user/profile">Profile</a>
          <a class="dropdown-item" href="/user/reset_password/">Change Password</a>
           <a class="dropdown-item" href="/user/logout">Logout</a>
         </div>
@@ -158,8 +159,6 @@ SignUp
       </div>
 
 {% comment %} body block {% endcomment %}
-
-
 
 
          <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

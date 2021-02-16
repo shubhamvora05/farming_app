@@ -1,8 +1,9 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from django.contrib.auth  import authenticate,  login, logout
-from user.models import UserRecord,ContactUs
-from user.forms import UserRecordForm
+from django.contrib.auth.forms  import UserChangeForm
+from user.models import UserRecord,ContactUs,UserProfile
+from user.forms import UserRecordForm,UserProfileForm
 from django.http import HttpResponse
 
 # Create your views here.
@@ -10,7 +11,21 @@ def userHome(request):
     response = redirect('/user/records')
     return response
 
-def userRecords(request,):
+def user_profile(request):
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            userImage=UserProfileForm(request.POST,request.FILES, instance=request.user)
+            if userImage.is_valid():
+                userImage.save()
+            return redirect('/user/profile')
+        else:
+            userImage=UserProfileForm()
+            context={'userImageform':userImage}
+            return render(request,'user/profile.html',context)   
+    else:
+        return redirect('/user/records') 
+
+def userRecords(request):
     if request.user.is_authenticated:
         records= UserRecord.objects.filter(user=request.user)
         bool="true"
