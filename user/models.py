@@ -5,12 +5,7 @@ from django.utils.timezone import now
 
 
 # user record model
-class UserProfile(models.Model):
-    user=models.ForeignKey(User,on_delete=models.CASCADE)
-    Change_photo=models.ImageField(upload_to='user/profile_pic/',default="user/Profile_pic/default-user.png")
 
-    def __str__(self):
-        return self.user.username
 
 class UserRecord(models.Model):
 
