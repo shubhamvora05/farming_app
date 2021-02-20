@@ -2,8 +2,8 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from django.contrib.auth  import authenticate,  login, logout
 from django.contrib.auth.forms  import UserChangeForm
-from user.models import UserRecord,ContactUs
-from user.forms import UserRecordForm
+from user.models import UserRecord,ContactUs,userProfile
+from user.forms import UserRecordForm,userProfileForm
 from django.http import HttpResponse
 
 # Create your views here.
@@ -11,7 +11,24 @@ def userHome(request):
     response = redirect('/user/records')
     return response
 
-
+def userProfilehandel(request):
+    if request.user.is_authenticated:
+        bool="true"
+        userprofiles = userProfile.objects.filter(user=request.user).first()
+        form = userProfileForm(instance=userprofiles)
+        profile={"form":form,'bool':bool,'userprofile':userprofiles}
+    else :
+        bool="false"
+        profile={'bool':bool}
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            userprofile1=userProfile.objects.filter(user=request.user).first()
+            form = userProfileForm(request.POST, request.FILES,instance=userprofile1)
+            if form.is_valid():
+                userProfile1= form.save(commit=False)
+                userProfile1.user = request.user
+                form.save()
+    return render(request,'user/profile.html',profile)
 
 def userRecords(request):
     if request.user.is_authenticated:

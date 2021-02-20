@@ -1,0 +1,26 @@
+{% extends "user/base.html" %}
+{% block title %}userRecords{% endblock %}
+
+{% block body %}
+
+{% ifequal bool "true"  %}
+
+<form action="/user/profile" method='post' enctype="multipart/form-data">
+ {{ form.as_p }}
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary">change</button>
+</form>
+{%endifequal%}
+<div class="row my-3">
+        <div class="col-md-1  ">
+       <h1>{{userprofile.mobileNo}}</h1>
+        </div>
+        <img src="/media/{{userprofile.ProfilePic}}" width="100px" height="100px" alt=""> 
+    </div>
+
+
+
+{% ifequal bool "false"  %}
+ <p>you are not authenticated!!! please, login or signup</p>
+{% endifequal %}
+{% endblock  %}

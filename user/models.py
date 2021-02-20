@@ -6,6 +6,13 @@ from django.utils.timezone import now
 
 # user record model
 
+class userProfile(models.Model):
+    user=models.OneToOneField(User,null=True, on_delete=models.CASCADE)
+    mobileNo=models.CharField(max_length = 30, blank = True,null = True)
+    ProfilePic=models.ImageField(upload_to='user/profilePics/',default="",null=True,blank=True)    
+
+    def __str__(self):
+        return self.user.username
 
 class UserRecord(models.Model):
 

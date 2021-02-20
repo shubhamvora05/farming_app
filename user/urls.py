@@ -13,6 +13,7 @@ urlpatterns = [
     
 
     path("records",views.userRecords,name='userRecords'),
+    path("profile",views.userProfilehandel,name='userProfile'),
     path("contactus",views.contactUs,name='contactus'),
     
     #password reset urls
