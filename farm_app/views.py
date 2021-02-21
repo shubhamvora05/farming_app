@@ -9,3 +9,6 @@ def index(request):
 
 def aboutUs(request):
     return render(request,"aboutUs.html")
+
+def errorHandler(request):
+    return render(request,"error404.html")

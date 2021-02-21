@@ -10,14 +10,21 @@
         {% csrf_token %}
         <button type="submit" class="btn btn-primary">change</button>
 </form>
-{%endifequal%}
 <div class="row my-3">
         <div class="col-md-1  ">
        <h1>{{userprofile.mobileNo}}</h1>
         </div>
-        <img src="/media/{{userprofile.ProfilePic}}" width="100px" height="100px" alt=""> 
-    </div>
 
+        {% if userprofile.ProfilePic %}
+        <img src="/media/{{userprofile.ProfilePic}}" width="100px" height="100px" alt="avatar"> 
+        {% else %}
+        <img src="/media/user/profilePics/defaultpic.jpg" width="100px" height="100px" alt=""> 
+        {% endif %}
+        
+   
+    </div>
+    <h1>also show here user full details. first name, last name, and email and at last put this form to change image and mobile no for edit.</h1>
+{%endifequal%}
 
 
 {% ifequal bool "false"  %}

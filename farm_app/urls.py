@@ -32,6 +32,8 @@ urlpatterns = [
     path("",views.index,name="Home"),
     path("aboutUs/",views.aboutUs,name="aboutUs"),
 
+    path("error/",views.errorHandler,name="404_Notfound"),
+
     #app url setting
     path("user/",include('user.urls')),  
     path("management/",include('management.urls')),
