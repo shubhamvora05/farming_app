@@ -1,5 +1,5 @@
-{% extends "user/base.html" %}
-{% block title %}userRecords{% endblock %}
+{% extends "management/base.html" %}
+{% block title %}manageRecords{% endblock %}
 
 {% comment %} //This blocks show to user only if it comes after login {% endcomment %}
 
@@ -41,55 +41,29 @@
 
 {% block body %}
 
-{% ifequal bool "true"  %}
+{% comment %} {% ifequal bool "true"  %} {% endcomment %}
 
 <div class="container mt-3">
   <div class="row">
     <div class="col-9 mr-auto">
       <h3>Your all pending service are here</h3>
     </div>
-    <div class="col-3 ml-auto">
-<button type="button" class="btn btn-success mr-2 " data-toggle="modal" data-target="#RecordModal">
-Request New Service
-</button>
     </div>
   </div>
 </div>
 
 
-{% comment %} userRecords modal {% endcomment %}
 
-<div class="modal fade" id="RecordModal" tabindex="-1" aria-labelledby="RecordModal" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="RecordModalTitle">Add new request here<p>If you have apply already once you need not to fill form again.</p></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action= "/user/records" method='post' enctype="multipart/form-data">
-      {{ form.as_p }}
-        {% csrf_token %}
-        <button type="submit" class="btn btn-primary">Submit</button>
-</form>
-      </div>
-      <div class="modal-footer">
-      </div>
-    </div>
-  </div>
-</div>
 
  {% for recordsPending in recordsPending %}
     <main role="main" class="container">
       <div class="jumbotron">
         <div class="container">
   <div class="row">
-    <div class="col">
+    <div class="col-4">
       <img src="/media/{{recordsPending.farmImage}}" width="280px" height="260px"  alt="">
     </div>
-    <div class="col-6">
+    <div class="col-4">
         <h3>{{recordsPending.name}}</h3>
         <h5>mobile No: {{recordsPending.mobileNo}}</h5>
         <h5>Address: {{recordsPending.farmaddress}}</h5>
@@ -98,6 +72,14 @@ Request New Service
         <h5>MonyeyDemand: {{recordsPending.moneyDemand}}</h5>
         <h5>Comment: {{recordsPending.extraComment}}</h5>
             </div>
+    <div class="col-4">
+    <form action="/management/manage" method="post">
+    {% csrf_token %}
+    <button type="submit" name="Approve"value="{{recordsPending.recordId}}" class="btn btn-success">Approve</button><br><br>
+    <button type="submit" name="Reject"value="{{recordsPending.recordId}}" class="btn btn-danger">Reject</button>
+    </form>
+    
+    </div>
           </div>
         </div>
       </div>
@@ -167,9 +149,10 @@ Request New Service
 
 
 
-{%endifequal%}
+{% comment %} {%endifequal%} {% endcomment %}
 {% ifequal bool "false"  %}
  <p>you are not authenticated!!! please, login or signup</p>
 {% endifequal %}
+
 {% endblock  %}
 

@@ -45,10 +45,12 @@ def userProfilehandel(request):
 def userRecords(request):
     
     if request.user.is_authenticated:
-        records = UserRecord.objects.filter(user=request.user)
+        recordsPending = UserRecord.objects.filter(user=request.user,status="pending")
+        recordsRejected = UserRecord.objects.filter(user=request.user,status="approved")
+        recordsApproved = UserRecord.objects.filter(user=request.user,status="rejected")
         bool = "true"
         form = UserRecordForm()
-        Allrecords = {'records': records, 'bool': bool, 'form': form}
+        Allrecords = {'recordsPending': recordsPending,'recordsRejected':recordsRejected,'recordsApproved':recordsApproved, 'bool': bool, 'form': form}
     else:
         bool = "false"
         Allrecords = {'records': "", 'bool': bool}
