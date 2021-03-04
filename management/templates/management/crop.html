@@ -1,0 +1,122 @@
+{% extends "management/base.html" %}
+
+{% block style %}
+.rowHead {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -150px;
+    margin-bottom: 10px;
+}
+.colCrop {
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    max-width: 19%;
+    background: whitesmoke;
+    padding: 10px;
+    margin: 5px;
+}
+.rowCrop {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: 15px;
+    margin-left: 15px;
+}
+.containerCrop {
+    max-width: 100%;
+}
+body {
+    background: #654ea3;
+    background: -webkit-linear-gradient(to right, #654ea3, #eaafc8);
+    background: linear-gradient(to right, #654ea3, #eaafc8);
+    min-height: 100vh;
+}
+.buttonReadMore {
+    padding: 6px 20px;
+    text-align: center;
+    border-radius: 10px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.buttonReadMore2 {
+    background-color: unset;
+    color: black;
+    border: 2px solid #008CBA;
+}
+
+.buttonReadMore2:hover {
+  background-color: #008CBA;
+  color: white;
+}
+.h3Crop{
+    font-size: 1.75rem;
+    color: white;
+}
+{% endblock %}
+
+
+{% block body %}
+<div class="container mt-3">
+  <div class="rowHead">
+    <div class="col-9 mr-auto">
+      <h3 class="h3Crop" >Add Crop here</h3>
+    </div>
+    <div class="col-3 ml-auto">
+<button type="button" class="btn btn-success mr-2 " data-toggle="modal" data-target="#RecordModal">
+Add new crop
+</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="RecordModal" tabindex="-1" aria-labelledby="RecordModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="RecordModalTitle">Add new Crop here</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action= "/management/crop/" method='post' enctype="multipart/form-data">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="containerCrop">
+  <div class="rowCrop">
+      {% for x in cropRecord %}
+      <div class="colCrop">
+          <center><b><h4>{{x.cropName}}</h4></b>{{x.cropSeason}}
+          <a href="{{x.crop_id}}"> <button id="{{x.crop_id}}" class="buttonReadMore buttonReadMore2">Read More Details</button></a></center>
+
+      </div>
+      {% if forloop.counter|divisibleby:5%}
+  </div>
+    <div class="rowCrop">
+      {% endif %}
+      {% endfor %}
+  </div>
+</div>
+
+{% endblock %}

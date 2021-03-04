@@ -1,0 +1,190 @@
+{% extends "management/base.html" %}
+
+{% block style %}
+.rowHead {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+.h3Crop{
+    font-size: 1.75rem;
+    color: black;
+}
+.colCropDetails {
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    max-width: 22%;
+}
+.addButton{
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    max-width: 12.2%;
+}
+.addButton2{
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    max-width: 14.3%;
+}
+.container {
+    max-width: 1140px;
+    background: yellow;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.colY {
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    max-width: 100%;
+}
+.colCrop {
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    max-width: 22%;
+    background: whitesmoke;
+    padding: 10px;
+    margin: 7px;
+}
+.rowCrop {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-left: 55px;
+}
+{% endblock%}
+
+{% block body%}
+
+<! –– crop details ––>
+<div class="container mt-3">
+    <div class="rowHead">
+        <div class="colY">
+            <h4>Crop Name:</h4>
+        <h4>Crop Type:</h4>
+        <h4>Crop Season:</h4>
+        <h4>Crop Storage:</h4>
+            </div>
+        <div class="colCropDetails">
+    <h4>{{cropId.cropName}}</h4>
+        <h4>{{cropId.cropType}}</h4>
+        <h4>{{cropId.cropSeason}}</h4>
+        <h4>{{cropId.totalStorage}}</h4>
+            </div>
+    </div>
+</div>
+
+<! –– Seeds details ––>
+<div class="container mt-3">
+  <div class="rowHead">
+    <div class="colY">
+      <h3 class="h3Crop" >Add Seeds for {{cropId.cropName}}</h3>
+    </div>
+    <div class="addButton">
+<button type="button" class="btn btn-success mr-2 " data-toggle="modal" data-target="#RecordModal">
+Add new Seeds
+</button>
+    </div>
+  </div>
+    <div class="rowCrop">
+        {% for x in seedsRecord %}
+      <div class="colCrop">
+            {{x.crop_name}}<br>
+            Seeds:{{x.seeds_name}}
+      </div>
+        {% if forloop.counter|divisibleby:4%}
+        </div>
+        <div class="rowCrop">
+        {% endif %}
+        {% endfor %}
+  </div>
+</div>
+
+
+<! –– pesticides details ––>
+<div class="container mt-3">
+  <div class="rowHead">
+    <div class="colY">
+      <h3 class="h3Crop" >Add Pesticides for {{cropId.cropName}}</h3>
+    </div>
+    <div class="addButton2">
+<button type="button" class="btn btn-success mr-2 " data-toggle="modal" data-target="#RecordModal1">
+Add new Pesticides
+</button>
+    </div>
+  </div>
+    <div class="rowCrop">
+        {% for x in pesticidesRecord %}
+      <div class="colCrop">
+            {{x.crop_name}}<br>
+            pesticides:{{x.pesticides_name}}
+      </div>
+        {% if forloop.counter|divisibleby:4%}
+        </div>
+        <div class="rowCrop">
+        {% endif %}
+        {% endfor %}
+  </div>
+</div>
+
+<! –– Seeds form ––>
+<div class="modal fade" id="RecordModal" tabindex="-1" aria-labelledby="RecordModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="RecordModalTitle1">Add Seeds</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action= "/management/crop/{{cropId.crop_id}}" method='post' enctype="multipart/form-data">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<! –– Pesticides form ––>
+<div class="modal fade" id="RecordModal1" tabindex="-1" aria-labelledby="RecordModal1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="RecordModalTitle">Add Pasticides</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action= "/management/crop/{{cropId.crop_id}}" method='post' enctype="multipart/form-data">
+            {{ form1.as_p }}
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -8,6 +8,8 @@ urlpatterns = [
     path("finance",views.finance,name='financeDepartment'),
     path("seeds",views.seeds,name='seedsDepartment'),
 
-    path("crop",views.crop,name='CropDepartment'), 
-    path("employee/",views.employee,name='employee'),
+    path("crop/",views.cropRecord,name='CropDepartment'),
+    path("employee/",views.employeeRecords,name='employee'),
+    path("employee/<int:id>", views.employeeProfile, name='employeeProfile'),
+    path("crop/<int:id>", views.cropAllDetails, name='corpdetails'),
 ]
