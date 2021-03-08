@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.timezone import now
+from management.models import crop
 
 
 # user record model
@@ -45,12 +46,12 @@ class UserRecord(models.Model):
     mobileNo = models.CharField(max_length=10, blank=False, null=False)
     farmaddress = models.CharField(max_length=150, blank=False, null=False)
     farmArea = models.IntegerField(default=0)
-    soilType = models.CharField(
-        max_length=11, choices=SOIL_CHOICES, default=siltSoil)
+    soilType = models.CharField(max_length=11, choices=SOIL_CHOICES, default=siltSoil)
     moneyDemand = models.IntegerField(default=0)
     farmImage = models.ImageField(upload_to='user/farm/', default="")
     extraComment = models.TextField()
     status=models.CharField(max_length=11, choices=Approvement, default=pending)
+    crop = models.ManyToManyField(crop,blank=True)
     timestamp = models.DateTimeField(default=now)
 
     def __str__(self):

@@ -92,10 +92,10 @@ Add new crop
         </button>
       </div>
       <div class="modal-body">
-        <form action= "/management/crop/" method='post' enctype="multipart/form-data">
+        <form action= "/management/crop/" method='post'>
         {{ form.as_p }}
         {% csrf_token %}
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" name="AddNewCrop" value="addnew" class="btn btn-primary">Submit</button>
         </form>
       </div>
     </div>
@@ -108,7 +108,8 @@ Add new crop
       {% for x in cropRecord %}
       <div class="colCrop">
           <center><b><h4>{{x.cropName}}</h4></b>{{x.cropSeason}}
-          <a href="{{x.crop_id}}"> <button id="{{x.crop_id}}" class="buttonReadMore buttonReadMore2">Read More Details</button></a></center>
+          <a href="{{x.crop_id}}"> <button id="{{x.crop_id}}" class="buttonReadMore buttonReadMore2">Seeds and pesticides</button></a>
+          <a href="{{x.crop_id}}"> <button id="{{x.crop_id}}" class="buttonReadMore buttonReadMore2">Crop records</button></a></center>
 
       </div>
       {% if forloop.counter|divisibleby:5%}
@@ -118,5 +119,40 @@ Add new crop
       {% endfor %}
   </div>
 </div>
+
+<!--showing records to select a crop-->
+
+<br><br><br>
+<h3>select crop in all approve records</h3>
+
+{% for recordsApproved in recordsApproved %}
+    <main role="main" class="container">
+      <div class="jumbotron">
+        <div class="container">
+  <div class="row">
+    <div class="col-3">
+      <img src="/media/{{recordsApproved.farmImage}}" width="200px" height="180px"  alt="">
+    </div>
+    <div class="col-6">
+        <h3>{{recordsApproved.name}}</h3>
+        <h5>mobile No: {{recordsApproved.mobileNo}}</h5>
+        <h5>Address: {{recordsApproved.farmaddress}}</h5>
+        <h5>Area: {{recordsApproved.farmArea}}</h5>
+        <h5>soilType: {{recordsApproved.soilType}}</h5>
+        <h5>MonyeyDemand: {{recordsApproved.moneyDemand}}</h5>
+        <h5>Comment: {{recordsApproved.extraComment}}</h5>
+            </div>
+            <div class="col-3">
+            <form action= "/management/crop/" method='post' >
+        {{ addCrop.as_p }}
+        {% csrf_token %}
+        <button type="submit" name="AddCropToRecord" value="{{recordsApproved.recordId}}" class="btn btn-primary">Submit</button>
+        </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    {% endfor %}
 
 {% endblock %}

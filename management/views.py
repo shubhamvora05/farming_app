@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from user.models import UserRecord, ContactUs, userProfile
 from management.models import employee,crop,seedsModel,pesticidesModel
 from django.contrib import messages
-from management.forms import EmployeeForm,CropForm,SeedsForm,PesticidesFrom
+from management.forms import EmployeeForm,CropForm,SeedsForm,PesticidesFrom,addCropToRecord
 
 # Create your views here.
 from django.http import HttpResponse
@@ -32,21 +32,33 @@ def manage(request):
     return render(request, 'management/manage.html',Allrecords)
 
 def cropRecord(request):
-    cropRecord = crop.objects.all()
+    
 
-    if request.method == 'POST':
-        form = CropForm(request.POST, request.FILES)
+    if request.POST.get("AddNewCrop"):
+        form = CropForm(request.POST)
         if form.is_valid():
             form.save()
             messages.info(request, 'You have added new record successfully.')
             return redirect('/management/crop/')
+
+    elif request.POST.get("AddCropToRecord"):
+        ToHandle=UserRecord.objects.filter(recordId=request.POST.get("AddCropToRecord")).first()
+        form=addCropToRecord(request.POST,instance=ToHandle)
+        if form.is_valid():
+            form.save()
+            messages.info(request, 'You have updated crop successfully.')
+            return redirect('/management/crop/')
+        
+
     else:
         form = CropForm()
-    dict = {'form': form,'cropRecord':cropRecord}
+        addCropToRecordForm=addCropToRecord()
+
+    cropRecord = crop.objects.all()
+    recordsApproved = UserRecord.objects.filter(status="approved")
+    dict = {'form': form,'addCrop':addCropToRecordForm,'cropRecord':cropRecord,'recordsApproved':recordsApproved}
     return render(request, 'management/crop.html', dict)
 
-def seeds(request):
-    return render(request, 'management/base.html')
 
 def finance(request):
     return render(request, 'management/base.html')
