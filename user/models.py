@@ -51,7 +51,7 @@ class UserRecord(models.Model):
     farmImage = models.ImageField(upload_to='user/farm/', default="")
     extraComment = models.TextField()
     status=models.CharField(max_length=11, choices=Approvement, default=pending)
-    crop = models.ManyToManyField(crop,blank=True)
+    selectCrop = models.ManyToManyField(crop,blank=True)
     timestamp = models.DateTimeField(default=now)
 
     def __str__(self):

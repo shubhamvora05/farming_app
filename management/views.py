@@ -25,15 +25,15 @@ def manage(request):
     
     
     
-    recordsPending = UserRecord.objects.filter(status="pending")
-    recordsRejected = UserRecord.objects.filter(status="rejected")
-    recordsApproved = UserRecord.objects.filter(status="approved")
+    recordsPending = UserRecord.objects.filter(status="pending").order_by('timestamp')
+    recordsRejected = UserRecord.objects.filter(status="rejected").order_by('timestamp')
+    recordsApproved = UserRecord.objects.filter(status="approved").order_by('timestamp')
     Allrecords = {'recordsPending': recordsPending,'recordsRejected':recordsRejected,'recordsApproved':recordsApproved}
     return render(request, 'management/manage.html',Allrecords)
 
-def cropRecord(request):
-    
 
+def cropRecord(request):
+    crp=""
     if request.POST.get("AddNewCrop"):
         form = CropForm(request.POST)
         if form.is_valid():
@@ -45,7 +45,9 @@ def cropRecord(request):
         ToHandle=UserRecord.objects.filter(recordId=request.POST.get("AddCropToRecord")).first()
         form=addCropToRecord(request.POST,instance=ToHandle)
         if form.is_valid():
-            form.save()
+            ToHandle.selectCrop.add(request.POST['selectCrop'])
+            crp=ToHandle.selectCrop.all()
+            print(crp)
             messages.info(request, 'You have updated crop successfully.')
             return redirect('/management/crop/')
         
@@ -53,10 +55,14 @@ def cropRecord(request):
     else:
         form = CropForm()
         addCropToRecordForm=addCropToRecord()
-
+    ToHandle=UserRecord.objects.filter(recordId="38").first()
+    crp=ToHandle.selectCrop.all()
+    print(crp)
     cropRecord = crop.objects.all()
-    recordsApproved = UserRecord.objects.filter(status="approved")
-    dict = {'form': form,'addCrop':addCropToRecordForm,'cropRecord':cropRecord,'recordsApproved':recordsApproved}
+    recordsApproved = UserRecord.objects.filter(status="approved").order_by('timestamp')
+    
+    dict = {'form': form,'addCrop':addCropToRecordForm,'cropRecord':cropRecord,'recordsApproved':recordsApproved,'crp':crp}
+
     return render(request, 'management/crop.html', dict)
 
 

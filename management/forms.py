@@ -15,7 +15,7 @@ class CropForm(forms.ModelForm):
 class addCropToRecord(forms.ModelForm):
     class Meta:
         model = UserRecord
-        fields = ('crop',)
+        fields = ('selectCrop',)
 
 class SeedsForm(forms.ModelForm):
     class Meta:

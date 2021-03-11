@@ -141,6 +141,7 @@ Add new crop
         <h5>soilType: {{recordsApproved.soilType}}</h5>
         <h5>MonyeyDemand: {{recordsApproved.moneyDemand}}</h5>
         <h5>Comment: {{recordsApproved.extraComment}}</h5>
+        
             </div>
             <div class="col-3">
             <form action= "/management/crop/" method='post' >
@@ -148,6 +149,13 @@ Add new crop
         {% csrf_token %}
         <button type="submit" name="AddCropToRecord" value="{{recordsApproved.recordId}}" class="btn btn-primary">Submit</button>
         </form>
+
+        <h2>crops in this record</h2>
+        {% for c in crp %}
+        <p>{{c.cropName}}</p>
+        {% endfor %}
+       
+        
             </div>
           </div>
         </div>
