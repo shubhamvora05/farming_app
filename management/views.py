@@ -33,7 +33,7 @@ def manage(request):
 
 
 def cropRecord(request):
-    crp=""
+    crp=[]
     if request.POST.get("AddNewCrop"):
         form = CropForm(request.POST)
         if form.is_valid():
@@ -46,8 +46,6 @@ def cropRecord(request):
         form=addCropToRecord(request.POST,instance=ToHandle)
         if form.is_valid():
             ToHandle.selectCrop.add(request.POST['selectCrop'])
-            crp=ToHandle.selectCrop.all()
-            print(crp)
             messages.info(request, 'You have updated crop successfully.')
             return redirect('/management/crop/')
         
@@ -55,14 +53,22 @@ def cropRecord(request):
     else:
         form = CropForm()
         addCropToRecordForm=addCropToRecord()
-    ToHandle=UserRecord.objects.filter(recordId="38").first()
-    crp=ToHandle.selectCrop.all()
-    print(crp)
+        
     cropRecord = crop.objects.all()
     recordsApproved = UserRecord.objects.filter(status="approved").order_by('timestamp')
-    
-    dict = {'form': form,'addCrop':addCropToRecordForm,'cropRecord':cropRecord,'recordsApproved':recordsApproved,'crp':crp}
 
+    recordsApprovedLength=UserRecord.objects.filter(status="approved").order_by('timestamp').count()
+    length=0
+    for recordNum in recordsApproved:
+        if length>=recordsApprovedLength :
+            break
+        else:
+            ToHandle = UserRecord.objects.filter(status="approved").order_by('timestamp')[length]
+            crp.append(ToHandle.selectCrop.all())
+            length+=1
+        
+    l=2
+    dict = {'form': form,'addCrop':addCropToRecordForm,'cropRecord':cropRecord,'recordsApproved':recordsApproved,'crp':crp,'mylist' :zip(recordsApproved, crp)}
     return render(request, 'management/crop.html', dict)
 
 
@@ -114,6 +120,6 @@ def cropAllDetails(request,id):
             return redirect('/management/crop/' + str(id))
     else:
         form1 = PesticidesFrom()
-
+        
         dict = {'form1':form1,'form':form,'cropId':crop_id[0],'seedsRecord':seedsRecord,'pesticidesRecord':pesticidesRecord}
     return render(request,'management/cropAllDetails.html',dict)

@@ -68,6 +68,7 @@ body {
 {% endblock %}
 
 
+
 {% block body %}
 <div class="container mt-3">
   <div class="rowHead">
@@ -125,7 +126,7 @@ Add new crop
 <br><br><br>
 <h3>select crop in all approve records</h3>
 
-{% for recordsApproved in recordsApproved %}
+{% for recordsApproved,l in mylist%}
     <main role="main" class="container">
       <div class="jumbotron">
         <div class="container">
@@ -144,18 +145,16 @@ Add new crop
         
             </div>
             <div class="col-3">
-            <form action= "/management/crop/" method='post' >
+        <form action= "/management/crop/" method='post' >
         {{ addCrop.as_p }}
         {% csrf_token %}
         <button type="submit" name="AddCropToRecord" value="{{recordsApproved.recordId}}" class="btn btn-primary">Submit</button>
         </form>
-
-        <h2>crops in this record</h2>
-        {% for c in crp %}
-        <p>{{c.cropName}}</p>
-        {% endfor %}
-       
         
+        <h2>crops in this record</h2>
+        {% for j in l %}
+        <p>{{j.cropName}}</p>
+        {% endfor %}
             </div>
           </div>
         </div>
