@@ -12,4 +12,5 @@ urlpatterns = [
     path("employee/",views.employeeRecords,name='employee'),
     path("employee/<int:id>", views.employeeProfile, name='employeeProfile'),
     path("crop/<int:id>", views.cropAllDetails, name='corpdetails'),
+    path("crop/cropRecords/<int:id>", views.cropRecords, name='cropRecords'),
 ]

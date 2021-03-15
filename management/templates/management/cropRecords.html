@@ -1,0 +1,44 @@
+{% extends "management/base.html" %}
+
+{% block body%}
+
+<h3>all assigned record in {{crop.cropName}}</h3>
+
+{% for recordsApproved,l in mylist%}
+    <main role="main" class="container">
+      <div class="jumbotron">
+        <div class="container">
+  <div class="row">
+    <div class="col-3">
+      <img src="/media/{{recordsApproved.farmImage}}" width="200px" height="180px"  alt="">
+    </div>
+    <div class="col-6">
+        <h3>{{recordsApproved.name}}</h3>
+        <h5>mobile No: {{recordsApproved.mobileNo}}</h5>
+        <h5>Address: {{recordsApproved.farmaddress}}</h5>
+        <h5>Area: {{recordsApproved.farmArea}}</h5>
+        <h5>soilType: {{recordsApproved.soilType}}</h5>
+        <h5>MonyeyDemand: {{recordsApproved.moneyDemand}}</h5>
+        <h5>Comment: {{recordsApproved.extraComment}}</h5>
+        
+            </div>
+            <div class="col-3">
+
+            <h2>crops in this record</h2>
+        {% for j in l %}
+        <p>{{j.cropName}}</p>
+        {% endfor %}
+
+        <form action= "/management/crop/cropRecords/{{crop.crop_id}}" method='post' >
+        {% csrf_token %}
+        <button type="submit" name="RemoveCropToRecord" value="{{recordsApproved.recordId}}" class="btn btn-primary">Remove crop</button>
+        </form>        
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    {% endfor %}
+
+
+{% endblock %}

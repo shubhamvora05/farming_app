@@ -67,31 +67,8 @@ def cropRecord(request):
             crp.append(ToHandle.selectCrop.all())
             length+=1
         
-    l=2
     dict = {'form': form,'addCrop':addCropToRecordForm,'cropRecord':cropRecord,'recordsApproved':recordsApproved,'crp':crp,'mylist' :zip(recordsApproved, crp)}
     return render(request, 'management/crop.html', dict)
-
-
-def finance(request):
-    return render(request, 'management/base.html')
-
-def employeeRecords(request):
-    employeeRecord = employee.objects.all()
-
-    if request.method == 'POST':
-        form = EmployeeForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            messages.info(request, 'You have added new record successfully.')
-            return redirect('/management/employee/')
-    else:
-        form = EmployeeForm()
-    dict = {'form': form, 'employeeRecord': employeeRecord}
-    return render(request, 'management/employee.html', dict)
-
-def employeeProfile(request,id):
-    employeeId = employee.objects.filter(employee_id=id)
-    return render(request,'management/employeeProfile.html',{'emid':employeeId[0]})
 
 
 def cropAllDetails(request,id):
@@ -123,3 +100,52 @@ def cropAllDetails(request,id):
         
         dict = {'form1':form1,'form':form,'cropId':crop_id[0],'seedsRecord':seedsRecord,'pesticidesRecord':pesticidesRecord}
     return render(request,'management/cropAllDetails.html',dict)
+
+
+def cropRecords(request,id):
+
+    if request.POST.get("RemoveCropToRecord"):
+        ToHandle=UserRecord.objects.filter(recordId=request.POST.get("RemoveCropToRecord")).first()
+        ToHandle.selectCrop.remove(id)
+        messages.info(request, 'You have Removed crop successfully from record.')
+        return redirect('/management/crop/cropRecords/'+str(id))
+            
+
+    crp=[]
+    recordsInCrop = UserRecord.objects.filter(selectCrop=id).order_by('timestamp').order_by('timestamp')
+    cropSelected = crop.objects.filter(crop_id=id)[0]
+    
+    recordsInCropLength=UserRecord.objects.filter(selectCrop=id).order_by('timestamp').order_by('timestamp').count()
+    length=0
+    for recordNum in recordsInCrop:
+        if length>=recordsInCropLength :
+            break
+        else:
+            ToHandle = UserRecord.objects.filter(selectCrop=id).order_by('timestamp').order_by('timestamp')[length]
+            crp.append(ToHandle.selectCrop.all())
+            length+=1
+    
+    dict = {'recordsInCrop':recordsInCrop,'crop':cropSelected,'mylist' :zip(recordsInCrop, crp)}
+    return render(request,'management/cropRecords.html',dict)
+
+
+def finance(request):
+    return render(request, 'management/base.html')
+
+def employeeRecords(request):
+    employeeRecord = employee.objects.all()
+
+    if request.method == 'POST':
+        form = EmployeeForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.info(request, 'You have added new record successfully.')
+            return redirect('/management/employee/')
+    else:
+        form = EmployeeForm()
+    dict = {'form': form, 'employeeRecord': employeeRecord}
+    return render(request, 'management/employee.html', dict)
+
+def employeeProfile(request,id):
+    employeeId = employee.objects.filter(employee_id=id)
+    return render(request,'management/employeeProfile.html',{'emid':employeeId[0]})

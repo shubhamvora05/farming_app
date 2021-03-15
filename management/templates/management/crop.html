@@ -110,7 +110,7 @@ Add new crop
       <div class="colCrop">
           <center><b><h4>{{x.cropName}}</h4></b>{{x.cropSeason}}
           <a href="{{x.crop_id}}"> <button id="{{x.crop_id}}" class="buttonReadMore buttonReadMore2">Seeds and pesticides</button></a>
-          <a href="{{x.crop_id}}"> <button id="{{x.crop_id}}" class="buttonReadMore buttonReadMore2">Crop records</button></a></center>
+          <a href="cropRecords/{{x.crop_id}}"> <button id="{{x.crop_id}}" class="buttonReadMore buttonReadMore2">Crop records</button></a></center>
 
       </div>
       {% if forloop.counter|divisibleby:5%}
@@ -148,7 +148,7 @@ Add new crop
         <form action= "/management/crop/" method='post' >
         {{ addCrop.as_p }}
         {% csrf_token %}
-        <button type="submit" name="AddCropToRecord" value="{{recordsApproved.recordId}}" class="btn btn-primary">Submit</button>
+        <button type="submit" name="AddCropToRecord" value="{{recordsApproved.recordId}}" class="btn btn-primary">Add crop</button>
         </form>
         
         <h2>crops in this record</h2>
