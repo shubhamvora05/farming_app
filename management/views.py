@@ -10,7 +10,7 @@ from django.http import HttpResponse
 # Create your views here.
 # Create your views here.
 def home(request):
-    return render(request, 'management/base.html')
+    return render(request, 'management/managementhome.html')
 
 def manage(request):
     if request.POST.get("Approve"):

@@ -46,8 +46,8 @@ def userRecords(request):
     
     if request.user.is_authenticated:
         recordsPending = UserRecord.objects.filter(user=request.user,status="pending")
-        recordsRejected = UserRecord.objects.filter(user=request.user,status="approved")
-        recordsApproved = UserRecord.objects.filter(user=request.user,status="rejected")
+        recordsRejected = UserRecord.objects.filter(user=request.user,status="rejected")
+        recordsApproved = UserRecord.objects.filter(user=request.user,status="approved")
         bool = "true"
         form = UserRecordForm()
         Allrecords = {'recordsPending': recordsPending,'recordsRejected':recordsRejected,'recordsApproved':recordsApproved, 'bool': bool, 'form': form}
