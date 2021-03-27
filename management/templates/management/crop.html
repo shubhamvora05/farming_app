@@ -93,11 +93,37 @@ Add new crop
         </button>
       </div>
       <div class="modal-body">
-        <form action= "/management/crop/" method='post'>
-        {{ form.as_p }}
-        {% csrf_token %}
-        <button type="submit" name="AddNewCrop" value="addnew" class="btn btn-primary">Submit</button>
+          
+<!--Add new crop Form-->
+          
+           <form action= "/management/crop/" method='post' enctype="multipart/form-data"> {% csrf_token %}
+            <table>
+            <tr><th><label for="id_cropName">CropName:</label></th><td>
+                <input class="marginFormTable" type="text" name="cropName" maxlength="30" required id="id_cropName"></td></tr>
+<tr><th><label for="id_cropType">CropType:</label></th><td><select class="marginFormTableSelect" name="cropType" id="id_cropType">
+  <option value="FoodCrop(Grains)" selected>FoodCrop(Grains)</option>
+
+  <option value="Fruits">Fruits</option>
+
+  <option value="Vegetables">Vegetables</option>
+
+  <option value="Non FoodCrop">Non FoodCrop</option>
+
+</select></td></tr>
+<tr><th><label for="id_cropSeason">CropSeason:</label></th><td><select class="marginFormTableSelect" name="cropSeason" id="id_cropSeason">
+  <option value="Monsoon(Kharif Crop)" selected>Monsoon(Kharif Crop)</option>
+
+  <option value="Winter(Rabi Crop)">Winter(Rabi Crop)</option>
+
+  <option value="Summer(Zaid Crop)">Summer(Zaid Crop)</option>
+
+</select></td></tr>
+<tr><th><label for="id_totalStorage">TotalStorage:</label></th><td><input class="marginFormTable" type="number" name="totalStorage" value="0" required id="id_totalStorage"></td></tr>
+            <input class="marginFormTable" type="hidden" name="csrfmiddlewaretoken" value="iQnosrYY6QhknWLKwxwCz7WawWhj0RUeoAqlaQSB6kBtivQ3grJVWmMo2bhfolaH">
+          </table>
+        <button type="submit" class="btn btn-primary">Submit</button>
         </form>
+          
       </div>
     </div>
   </div>
