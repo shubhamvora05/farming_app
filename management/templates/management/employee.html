@@ -110,11 +110,79 @@ Add new Employee
         </button>
       </div>
       <div class="modal-body">
-        <form action= "/management/employee/" method='post' enctype="multipart/form-data">
-        {{ form.as_p }}
-        {% csrf_token %}
-        <button type="submit" class="btn btn-primary">Submit</button>
+        
+        <!--Add new Employee form-->        
+           <form action= "/management/employee/" method='post' enctype="multipart/form-data"> {% csrf_token %}
+            <table>
+        <tr>
+            <th>
+                <label for="id_name">Name:</label>
+            </th>
+            <td>
+                <input class="marginFormTable" type="text" name="name" maxlength="30" required id="id_name">
+            </td>
+        </tr>
+<tr>
+    <th>
+        <label for="id_mobileNo">MobileNo:</label>
+    </th>
+    <td>
+        <input class="marginFormTable" type="text" name="mobileNo" maxlength="10" required id="id_mobileNo">
+    </td>
+</tr>
+<tr>
+    <th>
+        <label for="id_age">Age:</label>
+    </th>
+    <td>
+        <input class="marginFormTable" type="number" name="age" value="0" required id="id_age">
+    </td>
+</tr>
+<tr>
+    <th>
+        <label for="id_departmentType">DepartmentType:</label>
+    </th>
+    <td>
+        <select class="marginFormTableSelect" name="departmentType" id="id_departmentType">
+  <option value="Crop Department" selected>Crop Department</option>
+
+  <option value="Seeds Department">Seeds Department</option>
+
+  <option value="Workers Department">Workers Department</option>
+
+</select>
+    </td>
+</tr>
+<tr>
+    <th>
+        <label for="id_profileImage">ProfileImage:</label>
+    </th>
+    <td>
+        <input class="marginFormTable" type="file" name="profileImage" accept="image/*" required id="id_profileImage">
+    </td>
+</tr>
+<tr>
+    <th>
+        <label for="id_address">Address:</label>
+    </th>
+    <td>
+        <input class="marginFormTable" type="text" name="address" maxlength="150" required id="id_address">
+    </td>
+</tr>
+<tr>
+    <th>
+        <label for="id_ability">Ability:</label>
+    </th>
+    <td>
+        <textarea class="marginFormTable" name="ability" cols="40" rows="10" required id="id_ability">
+</textarea>
+    </td>
+</tr>
+    <input type="hidden" name="csrfmiddlewaretoken" value="UnHdtv5vunZ6nY1W6bv0sFwx6j5ZUUBr07KabUZ8uRjfix6fQ5IjPUmLCy5VioRU">
+            </table>
+            <button type="submit" class="btn btn-primary">Submit</button>
         </form>
+        
       </div>
     </div>
   </div>
