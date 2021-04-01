@@ -57,8 +57,17 @@ class UserRecord(models.Model):
     def __str__(self):
         return self.name
 
-# contact us model
+#assign each crop area in the record
+class cropArea(models.Model):
+    crQ_id=models.AutoField(primary_key=True)
+    userRecord= models.ForeignKey(UserRecord, on_delete=models.CASCADE)
+    crop = models.ForeignKey(crop, on_delete=models.CASCADE)
+    Area = models.PositiveIntegerField()
 
+    def __str__(self):
+        return '{} in {}'.format(self.crop.cropName, self.userRecord.name)
+
+# contact us model
 
 class ContactUs(models.Model):
     msg_id = models.AutoField(primary_key="true")

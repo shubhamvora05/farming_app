@@ -173,13 +173,15 @@ Add new crop
             <div class="col-3">
         <form action= "/management/crop/" method='post' >
         {{ addCrop.as_p }}
+        <label for="croparea">cropArea</label>
+        <input type="number" name="croparea" /><br><br>
         {% csrf_token %}
         <button type="submit" name="AddCropToRecord" value="{{recordsApproved.recordId}}" class="btn btn-primary">Add crop</button>
         </form>
         
         <h2>crops in this record</h2>
         {% for j in l %}
-        <p>{{j.cropName}}</p>
+        <p>{{j.crop.cropName}} -- {{j.Area}}</p>
         {% endfor %}
             </div>
           </div>

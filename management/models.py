@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.timezone import now
 
+
 # Create your models here.
 class crop(models.Model):
 
@@ -74,3 +75,4 @@ class pesticidesModel(models.Model):
 
     def __str__(self):
         return self.pesticides_name
+

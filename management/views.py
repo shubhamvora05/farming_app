@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from user.models import UserRecord, ContactUs, userProfile
+from user.models import UserRecord, ContactUs, userProfile,cropArea
 from management.models import employee,crop,seedsModel,pesticidesModel
 from django.contrib import messages
 from management.forms import EmployeeForm,CropForm,SeedsForm,PesticidesFrom,addCropToRecord
@@ -45,8 +45,34 @@ def cropRecord(request):
         ToHandle=UserRecord.objects.filter(recordId=request.POST.get("AddCropToRecord")).first()
         form=addCropToRecord(request.POST,instance=ToHandle)
         if form.is_valid():
-            ToHandle.selectCrop.add(request.POST['selectCrop'])
-            messages.info(request, 'You have updated crop successfully.')
+            
+            
+            #cheking croparea model has already crop added or not for particular user record.
+            cropIs=cropArea.objects.filter(userRecord=ToHandle,crop=request.POST['selectCrop'])
+            AreaIs=cropArea.objects.filter(userRecord=ToHandle)
+            AreaIsLength=cropArea.objects.filter(userRecord=ToHandle).count()
+            
+            length=0
+            TotalUsedArea=0
+            for a in AreaIs:
+                TotalUsedArea+=a.Area
+            crparea = int(request.POST['croparea'])
+           
+            if ToHandle.farmArea< TotalUsedArea  + crparea:
+                messages.info(request, 'You can add upto {} Acre area, please remove any crop or decrease area in any crop'.format(ToHandle.farmArea-TotalUsedArea) )
+                
+            else:
+                ToHandle.selectCrop.add(request.POST['selectCrop'])
+                if(cropIs):
+                    cropIs[0].Area=request.POST['croparea']
+                    cropIs[0].save()
+                else:
+                    ToaddCrop = crop.objects.filter(crop_id=request.POST['selectCrop'])[0]
+                    NewcropArea = cropArea(userRecord=ToHandle,crop=ToaddCrop,Area=request.POST['croparea'])
+                    NewcropArea.save()
+
+
+                messages.info(request, 'You have updated crop successfully.')
             return redirect('/management/crop/')
         
 
@@ -56,16 +82,11 @@ def cropRecord(request):
         
     cropRecord = crop.objects.all()
     recordsApproved = UserRecord.objects.filter(status="approved").order_by('timestamp')
-
-    recordsApprovedLength=UserRecord.objects.filter(status="approved").order_by('timestamp').count()
-    length=0
+    
     for recordNum in recordsApproved:
-        if length>=recordsApprovedLength :
-            break
-        else:
-            ToHandle = UserRecord.objects.filter(status="approved").order_by('timestamp')[length]
-            crp.append(ToHandle.selectCrop.all())
-            length+=1
+        ToHandle = cropArea.objects.filter(userRecord=recordNum)
+        crp.append(ToHandle)
+            
         
     dict = {'form': form,'addCrop':addCropToRecordForm,'cropRecord':cropRecord,'recordsApproved':recordsApproved,'crp':crp,'mylist' :zip(recordsApproved, crp)}
     return render(request, 'management/crop.html', dict)
@@ -114,17 +135,10 @@ def cropRecords(request,id):
     crp=[]
     recordsInCrop = UserRecord.objects.filter(selectCrop=id).order_by('timestamp').order_by('timestamp')
     cropSelected = crop.objects.filter(crop_id=id)[0]
-    
-    recordsInCropLength=UserRecord.objects.filter(selectCrop=id).order_by('timestamp').order_by('timestamp').count()
-    length=0
+  
     for recordNum in recordsInCrop:
-        if length>=recordsInCropLength :
-            break
-        else:
-            ToHandle = UserRecord.objects.filter(selectCrop=id).order_by('timestamp').order_by('timestamp')[length]
-            crp.append(ToHandle.selectCrop.all())
-            length+=1
-    
+        crp.append(recordNum.selectCrop.all())
+            
     dict = {'recordsInCrop':recordsInCrop,'crop':cropSelected,'mylist' :zip(recordsInCrop, crp)}
     return render(request,'management/cropRecords.html',dict)
 
