@@ -2,60 +2,208 @@
 {% block title %}userRecords{% endblock %}
 
 {% comment %} //This blocks show to user only if it comes after login {% endcomment %}
+{% load static %}
 
 
 {% block style %}
 
-       .col-3 {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 25%;
-    flex: 0 0 29%;
-    max-width: 17.8%;
+.col-3 {
+-webkit-box-flex: 0;
+-ms-flex: 0 0 25%;
+flex: 0 0 29%;
+max-width: 17.8%;
 }
 
 .mt-3, .my-3 {
-    margin-top: 1rem!important;
-    margin-bottom: 10px;
+margin-top: 1rem!important;
+margin-bottom: 10px;
 }
 
 .jumbotron {
-    padding: 1rem 1rem;
+padding: 1rem 1rem;
 }
 .col {
-    -ms-flex-preferred-size: 0;
-    flex-basis: 0;
-    -webkit-box-flex: 1;
-    -ms-flex-positive: 1;
-    flex-grow: 1;
-    max-width: 30%;
+-ms-flex-preferred-size: 0;
+flex-basis: 0;
+-webkit-box-flex: 1;
+-ms-flex-positive: 1;
+flex-grow: 1;
+max-width: 30%;
 }
 
 .col-6 {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 50%;
-    flex: 0 0 70%;
-    max-width: 100%;
+-webkit-box-flex: 0;
+-ms-flex: 0 0 50%;
+flex: 0 0 70%;
+max-width: 100%;
+}
+.divnotauth {
+background-color: #301b3f;
+color:#eeeeee;
+text-align: center;
+width: 100%;
+margin: auto;
+margin-top: 10px;
+height: 70px;
+padding-top: 20px;
+}
+.divnotauthNew{
+background-color: #301b3f;
+color:#eeeeee;
+text-align: center;
+width: 100%;
+margin: auto;
+margin-top: 10px;
+height: 70px;
+padding-top: 20px;
+margin-left:5px;
+}
+.divnotauthNew1{
+background-color: #301b3f;
+color:#eeeeee;
+text-align: center;
+width: 100%;
+margin: auto;
+margin-top: 10px;
+height: 70px;
+}
+#backgroundDivPending{
+background:yellow;
+margin-bottom: 1rem;
+}
+#backgroundDivApproved{
+background:green;
+margin-bottom: 1rem;
+}
+#backgroundDivRejected{
+background:red;
+margin-bottom: 1rem;
+}
+.myNewRequest{
+-webkit-box-flex: 0;
+margin-right:7px;
+-ms-flex: 0 0 25%;
+}
+.approvRejected {
+background: white;
+padding-left: 135px;
+padding-bottom: 0.2px;
+margin-bottom: 10px;
+}
+img {
+vertical-align: middle;
+border-style: none;
+height: 230px;
+width: 300px;
+}
+.vbtn{
+background:blue;
+}
+
+@media only screen and (max-width:1000px){
+.myNewRequest {
+-webkit-box-flex: 0;
+margin-left: 14px;
+-ms-flex: 0 0 25%;
+}
+.h3Size{
+font-size: 20px;
+}
+.approvRejected {
+background: white;
+padding-left: 90px;
+padding-bottom: 0.2px;
+margin-bottom: 10px;
+}
+.divnotauth {
+    width: 70%;
+}
+}
+
+@media only screen and (max-width:750px){
+.approvRejected {
+background: white;
+padding-left: 40px;
+padding-bottom: 0.2px;
+margin-bottom: 10px;
+}
+.h3SizeApprovRejected{
+font-size: 20px;
+}
+.h5SizeApprovRejected{
+font-size: 15px;
+}
+}
+
+@media only screen and (max-width:650px){
+img {
+vertical-align: middle;
+border-style: none;
+width: 220px;
+height: 200px;
+}
+#backgroundDivPending {
+background: yellow;
+margin-bottom: 1rem;
+text-align: center;
+}
+#backgroundDivApproved{
+background:green;
+margin-bottom: 1rem;
+text-align: center;
+}
+#backgroundDivRejected{
+background:red;
+margin-bottom: 1rem;
+text-align: center;
+}
+.leftText {
+text-align: left;
+margin-left: 13px;
+margin-top:10px;
+}
+.h3Size {
+font-size: 15px;
+}
+.approvRejected {
+background: white;
+padding-left: 20px;
+padding-bottom: 0.2px;
+margin-bottom: 10px;
+}
+.divnotauth {
+background-color: #301b3f;
+color:#eeeeee;
+text-align: center;
+width: 100%;
+margin: auto;
+margin-top: 10px;
+height: 70px;
+padding-top: 20px;
+font-size:15px;
+}
 }
 {% endblock %}
+
 
 
 {% block body %}
 
 {% ifequal bool "true"  %}
-
 <div class="container mt-3">
   <div class="row">
     <div class="col-9 mr-auto">
-      <h3>Your all pending service are here</h3>
+        {% if recordsPending %}
+            <h3 class="h3Size">Your all pending service are here</h3>
+        {% endif %}
     </div>
-    <div class="col-3 ml-auto">
+    <div class="myNewRequest">
 <button type="button" class="btn btn-success mr-2 " data-toggle="modal" data-target="#RecordModal">
 Request New Service
 </button>
     </div>
   </div>
 </div>
-
 
 {% comment %} userRecords modal {% endcomment %}
 
@@ -83,13 +231,13 @@ Request New Service
 
  {% for recordsPending in recordsPending %}
     <main role="main" class="container">
-      <div class="jumbotron">
+      <div id="backgroundDivPending" class="jumbotron">
         <div class="container">
   <div class="row">
     <div class="col">
       <img src="/media/{{recordsPending.farmImage}}" width="280px" height="260px"  alt="">
     </div>
-    <div class="col-6">
+    <div class="leftText col">
         <h3>{{recordsPending.name}}</h3>
         <h5>mobile No: {{recordsPending.mobileNo}}</h5>
         <h5>Address: {{recordsPending.farmaddress}}</h5>
@@ -103,23 +251,25 @@ Request New Service
       </div>
     </main>
     {% endfor %}
-    
+
    <!--all approved record showing-->
 
-    <div>
-      <h3>Your all approved service are here.</h3>
-      <h5>we will looke at them.</h5>
+    <div class="approvRejected">
+{% if recordsApproved %}
+      <h3 class="h3SizeApprovRejected" >Your all approved service are here.</h3>
+      <h5 class="h5SizeApprovRejected">we will looke at them.</h5>
+{% endif %}
     </div>
 
     {% for recordsApproved in recordsApproved %}
     <main role="main" class="container">
-      <div class="jumbotron">
+      <div id="backgroundDivApproved" class="jumbotron">
         <div class="container">
   <div class="row">
     <div class="col">
       <img src="/media/{{recordsApproved.farmImage}}" width="280px" height="260px"  alt="">
     </div>
-    <div class="col-6">
+    <div class="leftText col">
         <h3>{{recordsApproved.name}}</h3>
         <h5>mobile No: {{recordsApproved.mobileNo}}</h5>
         <h5>Address: {{recordsApproved.farmaddress}}</h5>
@@ -135,21 +285,23 @@ Request New Service
     {% endfor %}
 
     <!--showing all rejected records here-->
- <div>
-      <h3>Your all rejected service are here.</h3>
-      <h5>You can apply again for this one after some changes</h5>
+ <div class="approvRejected">
+     {% if recordsRejected %}
+      <h3 class="h3SizeApprovRejected">Your all rejected service are here.</h3>
+      <h5 class="h5SizeApprovRejected">You can apply again for this one after some changes</h5>
+     {% endif %}
     </div>
-  
-  
+
+
 {% for recordsRejected in recordsRejected %}
     <main role="main" class="container">
-      <div class="jumbotron">
+      <div id="backgroundDivRejected" class="jumbotron">
         <div class="container">
   <div class="row">
     <div class="col">
       <img src="/media/{{recordsRejected.farmImage}}" width="280px" height="260px"  alt="">
     </div>
-    <div class="col-6">
+    <div class="leftText col">
         <h3>{{recordsRejected.name}}</h3>
         <h5>mobile No: {{recordsRejected.mobileNo}}</h5>
         <h5>Address: {{recordsRejected.farmaddress}}</h5>
@@ -164,12 +316,29 @@ Request New Service
     </main>
     {% endfor %}
 
-
-
-
 {%endifequal%}
+
 {% ifequal bool "false"  %}
- <p>you are not authenticated!!! please, login or signup</p>
+<div class="container">
+  <div class="row">
+      <div class="divnotauth">
+              you are not authenticated!!! please, login or signup
+      </div>
+  </div>
+    <div class="row">
+      <div class="col divnotauthNew1">
+          <div class="row vbtn">
+dfbgnfbcvb
+          </div>
+          <div class="row vbtn">
+              scdffdfggbn
+          </div>
+      </div>
+        <div class="col divnotauthNew">
+
+      </div>
+  </div>
+</div>
 {% endifequal %}
 {% endblock  %}
 

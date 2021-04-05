@@ -9,6 +9,10 @@
 
 <html>
     <head>
+        {% block head %} {% endblock %}
+         <style>
+        {% block style %} {% endblock %}
+    </style>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>{%block title%}{%endblock%}</title>
@@ -16,11 +20,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="">
-         <style>
-        {% block style %} {% endblock %}
-    </style>
+
     </head>
-    <body>
+    <body style="background-color: #ececec">
        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="#">Farm app</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -136,7 +138,6 @@ SignUp
   </div>
 </div>
 
-<!--body block-->
 
 {% block body %}{% endblock %}
 
@@ -169,7 +170,7 @@ SignUp
        <div class="modal-footer">
       </div>
 
-
+{% comment %} body block {% endcomment %}
 
 
          <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
