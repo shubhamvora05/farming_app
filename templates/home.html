@@ -1,3 +1,130 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block body %} Hello home Page Add by Aksh Maradiya{% endblock %}
+{% block style %}
+body {
+     background-image:url("{%static 'user/head.jpg' %}");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+.mt-5, .my-5 {
+    margin-top: 8rem!important;
+}
+
+
+div.userbackground {
+        background-image: url("{%static 'user/farm.jpg' %}");
+     background-size: 400px 300px;
+    background-repeat: no-repeat;
+ opacity: 1;
+}
+div.userbackground:hover{
+-webkit-transform: scale(1.2);
+-ms-transform: scale(1.2);
+transform: scale(1.2);
+transition: 0.5s ease;
+}
+.divuser{
+  height:300px;
+  width:400px;
+  text-align: center;
+     padding-top: 110px;
+         color:white;
+    font-size:40px;
+    text-shadow: 0 0 3px #801336, 0 0 5px #801336;
+           font-weight: bold;
+}
+
+
+div.departmentbackground {
+       background:#302C2C;
+     background-size: 400px 300px;
+ background-repeat: no-repeat;
+   background-image: url("{%static 'user/department.jpg' %}");
+     opacity: 0.8;
+
+}
+div.departmentbackground:hover{
+-webkit-transform: scale(1.2);
+-ms-transform: scale(1.2);
+transform: scale(1.2);
+transition: 0.5s ease;
+}
+.divdepartment{
+  height:300px;
+  width:400px;
+    text-align: center;
+    padding-top: 110px;
+     color:white;
+     text-shadow: 0 0 3px #801336, 0 0 5px #801336;
+           font-weight: bold;
+    font-size:40px;
+}
+
+
+
+.text{
+    color:white;
+    font-size:20px;
+}
+.center{
+ margin-left: auto;
+  margin-right: auto;
+}
+
+
+@media only screen and (max-width:650px){
+.mt-5, .my-5 {
+    margin-top: 6rem!important;
+}
+div.userbackground {
+     background-size: 300px 200px;
+}
+.divuser{
+  height:200px;
+  width:300px;
+  text-align: center;
+     padding-top: 70px;
+    font-size:25px;
+}
+
+div.departmentbackground {
+     background-size: 300px 200px;
+}
+.divdepartment{
+  height:200px;
+  width:300px;
+    text-align: center;
+    padding-top: 70px;
+    font-size:25px;
+}
+.text{
+    color:white;
+    font-size:15px;
+}
+.center{
+ margin-left: auto;
+  margin-right: auto;
+}
+}
+
+{% endblock %}
+
+{% block body %}
+<div class="mt-5 container">
+  <div class="row">
+    <a class="nav-link center"  href="/user/">
+    <div class="divuser userbackground">
+      USERS<br><span class="text">Apply your farm for renting</span>
+    </div>
+    </a>
+    <a class="nav-link center" href="/management/">
+    <div class="divdepartment departmentbackground">
+      DEPARTMENT<br>
+      <span class="text">Staff login here</span>
+    </div>
+    </a>
+  </div>
+</div>
+{% endblock %}
