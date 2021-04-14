@@ -37,35 +37,46 @@ max-width: 30%;
 flex: 0 0 70%;
 max-width: 100%;
 }
+
+
+
+
 .divnotauth {
-background-color: #301b3f;
+    background-color: #424767;
 color:#eeeeee;
 text-align: center;
 width: 100%;
 margin: auto;
-margin-top: 10px;
-height: 70px;
+height: 300px;
 padding-top: 20px;
 }
-.divnotauthNew{
-background-color: #301b3f;
-color:#eeeeee;
-text-align: center;
-width: 100%;
-margin: auto;
-margin-top: 10px;
-height: 70px;
-padding-top: 20px;
-margin-left:5px;
+.hw{
+width:300px;
+height:230px;
 }
-.divnotauthNew1{
-background-color: #301b3f;
-color:#eeeeee;
-text-align: center;
-width: 100%;
-margin: auto;
-margin-top: 10px;
-height: 70px;
+#divrow{
+text-align:center;
+}
+.h5login{
+margin-top:20px;
+}
+.h2login{
+margin-top:0px;
+}
+@media only screen and (max-width:1350px){
+.hw{
+width:250px;
+height:180px;
+}
+}
+@media only screen and (max-width:1200px){
+.hw{
+width:400px;
+height:330px;
+}
+#divrow{
+text-align:center;
+}
 }
 #backgroundDivPending{
 background:yellow;
@@ -90,21 +101,18 @@ padding-left: 135px;
 padding-bottom: 0.2px;
 margin-bottom: 10px;
 }
-img {
-vertical-align: middle;
-border-style: none;
-height: 230px;
-width: 300px;
-}
 .vbtn{
 background:blue;
 }
-
 @media only screen and (max-width:1000px){
 .myNewRequest {
 -webkit-box-flex: 0;
 margin-left: 14px;
 -ms-flex: 0 0 25%;
+}
+.h5login{
+margin-top:20px;
+font-size:15px;
 }
 .h3Size{
 font-size: 20px;
@@ -115,8 +123,12 @@ padding-left: 90px;
 padding-bottom: 0.2px;
 margin-bottom: 10px;
 }
-.divnotauth {
-    width: 70%;
+.hw{
+width:330px;
+height:260px;
+}
+#divrow{
+text-align:center;
 }
 }
 
@@ -127,6 +139,20 @@ padding-left: 40px;
 padding-bottom: 0.2px;
 margin-bottom: 10px;
 }
+.h2login{
+font-size:20px;
+}
+.h5login{
+margin-top:20px;
+font-size:12px;
+}
+.divnotauth{
+height:260px;
+}
+.hw{
+width:270px;
+height:200px;
+}
 .h3SizeApprovRejected{
 font-size: 20px;
 }
@@ -136,12 +162,6 @@ font-size: 15px;
 }
 
 @media only screen and (max-width:650px){
-img {
-vertical-align: middle;
-border-style: none;
-width: 220px;
-height: 200px;
-}
 #backgroundDivPending {
 background: yellow;
 margin-bottom: 1rem;
@@ -172,15 +192,26 @@ padding-bottom: 0.2px;
 margin-bottom: 10px;
 }
 .divnotauth {
-background-color: #301b3f;
 color:#eeeeee;
 text-align: center;
 width: 100%;
 margin: auto;
-margin-top: 10px;
-height: 70px;
 padding-top: 20px;
 font-size:15px;
+}
+.h2login{
+font-size:20px;
+}
+.h5login{
+margin-top:20px;
+font-size:12px;
+}
+.divnotauth{
+height:300px;
+}
+.hw{
+width:320px;
+height:200px;
 }
 }
 {% endblock %}
@@ -218,7 +249,32 @@ Request New Service
       </div>
       <div class="modal-body">
         <form action= "/user/records" method='post' enctype="multipart/form-data">
-      {{ form.as_p }}
+            <table>
+      <tr><th><label for="id_name">Name:</label></th>
+          <td><input type="text" name="name" maxlength="30" required id="id_name"></td>
+      </tr>
+<tr><th><label for="id_mobileNo">MobileNo:</label></th><td><input type="text" name="mobileNo" maxlength="10" required id="id_mobileNo"></td></tr>
+<tr><th><label for="id_farmaddress">Farmaddress:</label></th><td><input type="text" name="farmaddress" maxlength="150" required id="id_farmaddress"></td></tr>
+<tr><th><label for="id_farmArea">FarmArea:</label></th><td><input type="number" name="farmArea" value="0" required id="id_farmArea"></td></tr>
+<tr><th><label for="id_soilType">SoilType:</label></th><td><select name="soilType" id="id_soilType">
+  <option value="Sandy soil">Sandy Soil</option>
+
+  <option value="Silt Soil" selected>Silt Soil</option>
+
+  <option value="Clay Soil">Clay Soil</option>
+
+  <option value="Loamy Soil">Loamy Soil</option>
+
+</select></td></tr>
+<tr><th><label for="id_moneyDemand">MoneyDemand:</label></th><td><input type="number" name="moneyDemand" value="0" required id="id_moneyDemand"></td></tr>
+<tr><th><label for="id_farmImage">FarmImage:</label></th><td><input type="file" name="farmImage" accept="image/*" required id="id_farmImage"></td></tr>
+<tr><th><label for="id_extraComment">ExtraComment:</label></th><td><textarea name="extraComment" cols="30" rows="10" required id="id_extraComment">
+</textarea></td></tr>
+        <input type="hidden" name="csrfmiddlewaretoken" value="sSl494fxDs3XNbUr3taQYI7hCJHMvbkhNjfOowNhXgFoxHnNgPqHp5Aap0HuhFL7">
+                </table>
+</form>
+
+            </table>
         {% csrf_token %}
         <button type="submit" class="btn btn-primary">Submit</button>
 </form>
@@ -309,7 +365,7 @@ Request New Service
         <h5>soilType: {{recordsRejected.soilType}}</h5>
         <h5>MonyeyDemand: {{recordsRejected.moneyDemand}}</h5>
         <h5>Comment: {{recordsRejected.extraComment}}</h5>
-            </div>
+"{%static 'user/div1.jpg' %}"            </div>
           </div>
         </div>
       </div>
@@ -318,27 +374,31 @@ Request New Service
 
 {%endifequal%}
 
+
 {% ifequal bool "false"  %}
-<div class="container">
+<div class="container-fluid">
   <div class="row">
       <div class="divnotauth">
-              you are not authenticated!!! please, login or signup
+           <img src="{%static 'user/agritech.png' %}" height="150px" width="170px"/>
+<!--              you are not authenticated!!! please, login or signup<br><br>-->
+          <h2 class="h2login">More farm together with best technology</h2>
+          <h5 class="h5login">Keep login and apply your farm for renting if you are new then signup, you can bid for price</h5>
       </div>
   </div>
-    <div class="row">
-      <div class="col divnotauthNew1">
-          <div class="row vbtn">
-dfbgnfbcvb
-          </div>
-          <div class="row vbtn">
-              scdffdfggbn
-          </div>
-      </div>
-        <div class="col divnotauthNew">
-
-      </div>
-  </div>
+    <div id="divrow" class="row">
+        <div id="divcol1" class="col">
+                      <img class="hw" src="{%static 'user/div8.jpg' %}" />
+        </div>
+         <div id="divcol2" class="col">
+                      <img class="hw" src="{%static 'user/div2.jpg' %}"  width="300px" height="230px"/>
+        </div>
+         <div id="divcol3" class="col">
+                      <img class="hw" src="{%static 'user/div3.jpg' %}"  width="300px" height="230px"/>
+        </div>
+         <div id="divcol4" class="col">
+                      <img class="hw" src="{%static 'user/div5.jpg' %}"  width="300px" height="230px"/>
+        </div>
+    </div>
 </div>
 {% endifequal %}
 {% endblock  %}
-
