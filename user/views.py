@@ -141,3 +141,6 @@ def contactUs(request):
 
 def AboutUs(request):
     return render(request,'user/AboutUs.html')
+
+def Pricing(request):
+    return render(request,'user/pricing.html')

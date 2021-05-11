@@ -3,27 +3,83 @@
 
 {% block body %}
 
+<style>
+.bdy{
+    background:lightgrey;
+    margin:20px 18%;
+    padding:20px;
+}
+img{
+    align-self: center;
+    border-radius:50%;
+    padding: 30px 30px 20px; 
+    height: 300px;
+    width: 300px;
+}
+.row{
+    padding: 20px 0;
+}
+.spn{
+    margin:5px 0 0 20%;
+}
+.headspn{
+ font-size: 20px;
+ font-weight:bold;
+}
+.textspn{
+    font-size:15px;
+    color:black;
+}
+
+</style>
+
 {% ifequal bool "true"  %}
 
-<form action="/user/profile" method='post' enctype="multipart/form-data">
+<div class="bdy">
+{% if userprofile.ProfilePic %}
+      <center> <img src="/media/{{userprofile.ProfilePic}}"  alt="avatar"> </center> 
+        {% else %}
+       <center><img src="/media/user/profilePics/default.jpg" alt="Update your image"></center>  
+        {% endif %}
+        <center><span style="font-size:25px;color:blue;">{{request.user.username}}</span></center>
+        
+        <hr style="height:6px;">
+        
+        <div class="row">
+        <div class="col-6">
+        <span class="spn headspn">Name</span><br>
+        <span class="spn textspn">{{request.user.get_full_name}}</span>
+        </div>
+        <div class="col-6">
+        <span class="spn headspn">User Id</span><br>
+        <span class="spn textspn">{{request.user.id}}</span>
+        
+        </div>
+        </div>
+         
+         <div class="row">
+        <div class="col-6">
+        <span class="spn headspn">Phone No</span><br>
+        <span class="spn textspn">{{userprofile.mobileNo}}</span>
+        </div>
+        <div class="col-6">
+        <span class="spn headspn"> Email</span><br>
+        <span class="spn textspn">{{request.user.email}}</span>
+        </div>
+        </div>
+
+        <hr style="height:6px;">
+
+        <form action="/user/profile" method='post' enctype="multipart/form-data">
  {{ form.as_p }}
         {% csrf_token %}
         <button type="submit" class="btn btn-primary">change</button>
 </form>
-<div class="row my-3">
-        <div class="col-md-1  ">
-       <h1>{{userprofile.mobileNo}}</h1>
-        </div>
+</div>
 
-        {% if userprofile.ProfilePic %}
-        <img src="/media/{{userprofile.ProfilePic}}" width="100px" height="100px" alt="avatar"> 
-        {% else %}
-        <img src="/media/user/profilePics/defaultpic.jpg" width="100px" height="100px" alt=""> 
-        {% endif %}
-        
+
+
    
-    </div>
-    <h1>also show here user full details. first name, last name, and email and at last put this form to change image and mobile no for edit.</h1>
 {%endifequal%}
 
 
