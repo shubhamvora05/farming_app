@@ -7,6 +7,7 @@
 
 {% block style %}
 
+
 .col-3 {
 -webkit-box-flex: 0;
 -ms-flex: 0 0 25%;
@@ -164,6 +165,7 @@ margin-top:10px;
 }
 .h3Size {
 font-size: 15px;
+font-family:Verdana;
 }
 .approvRejected {
 background: white;
@@ -190,20 +192,7 @@ font-size:15px;
 {% block body %}
 
 {% ifequal bool "true"  %}
-<div class="container mt-3">
-  <div class="row">
-    <div class="col-9 mr-auto">
-        {% if recordsPending %}
-            <h3 class="h3Size">Your all pending service are here</h3>
-        {% endif %}
-    </div>
-    <div class="myNewRequest">
-<button type="button" class="btn btn-success mr-2 " data-toggle="modal" data-target="#RecordModal">
-Request New Service
-</button>
-    </div>
-  </div>
-</div>
+
 
 {% comment %} userRecords modal {% endcomment %}
 
@@ -225,6 +214,23 @@ Request New Service
       </div>
       <div class="modal-footer">
       </div>
+    </div>
+  </div>
+</div>
+
+<div class="recordspending records">
+
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-9 mr-auto">
+        {% if recordsPending %}
+            <h3 class="h3Size">Your all pending service are here</h3>
+        {% endif %}
+    </div>
+    <div class="myNewRequest">
+<button type="button" class="btn btn-success mr-2 " data-toggle="modal" data-target="#RecordModal">
+Request New Service
+</button>
     </div>
   </div>
 </div>
@@ -251,15 +257,15 @@ Request New Service
       </div>
     </main>
     {% endfor %}
-
+</div>
    <!--all approved record showing-->
 
-    <div class="approvRejected">
+    <div class="approvRejected records">
 {% if recordsApproved %}
       <h3 class="h3SizeApprovRejected" >Your all approved service are here.</h3>
       <h5 class="h5SizeApprovRejected">we will looke at them.</h5>
 {% endif %}
-    </div>
+    
 
     {% for recordsApproved in recordsApproved %}
     <main role="main" class="container">
@@ -283,16 +289,15 @@ Request New Service
       </div>
     </main>
     {% endfor %}
+</div>
 
     <!--showing all rejected records here-->
- <div class="approvRejected">
+ <div class="approvRejected records">
      {% if recordsRejected %}
       <h3 class="h3SizeApprovRejected">Your all rejected service are here.</h3>
       <h5 class="h5SizeApprovRejected">You can apply again for this one after some changes</h5>
      {% endif %}
-    </div>
-
-
+    
 {% for recordsRejected in recordsRejected %}
     <main role="main" class="container">
       <div id="backgroundDivRejected" class="jumbotron">
@@ -315,6 +320,7 @@ Request New Service
       </div>
     </main>
     {% endfor %}
+</div>
 
 {%endifequal%}
 
@@ -325,19 +331,7 @@ Request New Service
               you are not authenticated!!! please, login or signup
       </div>
   </div>
-    <div class="row">
-      <div class="col divnotauthNew1">
-          <div class="row vbtn">
-dfbgnfbcvb
-          </div>
-          <div class="row vbtn">
-              scdffdfggbn
-          </div>
-      </div>
-        <div class="col divnotauthNew">
-
-      </div>
-  </div>
+  
 </div>
 {% endifequal %}
 {% endblock  %}

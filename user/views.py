@@ -138,3 +138,6 @@ def contactUs(request):
         messages.info(request, 'We got your query. we will look at soon.')
         return redirect('contactus') 
     return render(request, 'user/contactus.html')
+
+def AboutUs(request):
+    return render(request,'user/AboutUs.html')

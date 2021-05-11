@@ -29,8 +29,7 @@ urlpatterns = [
  
     #home setting
     path("",views.index,name="Home"),
-    path("",views.index,name="Home"),
-    path("aboutUs/",views.aboutUs,name="aboutUs"),
+ 
 
     path("error/",views.errorHandler,name="404_Notfound"),
 
