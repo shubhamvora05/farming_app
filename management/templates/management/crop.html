@@ -34,10 +34,13 @@
     max-width: 100%;
 }
 body {
-    background: #654ea3;
-    background: -webkit-linear-gradient(to right, #654ea3, #eaafc8);
-    background: linear-gradient(to right, #654ea3, #eaafc8);
-    min-height: 100vh;
+    
+    
+}
+.bdy{
+    background: Gainsboro;
+    margin: 10px 7%;
+    padding: 10px 30px;
 }
 .buttonReadMore {
     padding: 6px 20px;
@@ -63,20 +66,21 @@ body {
 }
 .h3Crop{
     font-size: 1.75rem;
-    color: white;
+    color: blue;
 }
 {% endblock %}
 
 
 
 {% block body %}
+<div class="bdy">
 <div class="container mt-3">
   <div class="rowHead">
     <div class="col-9 mr-auto">
-      <h3 class="h3Crop" >Add Crop here</h3>
+      <h3 class="h3Crop" >Crop List</h3>
     </div>
     <div class="col-3 ml-auto">
-<button type="button" class="btn btn-success mr-2 " data-toggle="modal" data-target="#RecordModal">
+<button type="button" class="btn mr-2 " style="background-color:lightblue" data-toggle="modal" data-target="#RecordModal">
 Add new crop
 </button>
     </div>
@@ -96,7 +100,8 @@ Add new crop
           
 <!--Add new crop Form-->
           
-           <form action= "/management/crop/" method='post' enctype="multipart/form-data"> {% csrf_token %}
+           <form action= "/management/crop/" method='post' enctype="multipart/form-data"> 
+           {% csrf_token %}
             <table>
             <tr><th><label for="id_cropName">CropName:</label></th><td>
                 <input class="marginFormTable" type="text" name="cropName" maxlength="30" required id="id_cropName"></td></tr>
@@ -121,6 +126,7 @@ Add new crop
 <tr><th><label for="id_totalStorage">TotalStorage:</label></th><td><input class="marginFormTable" type="number" name="totalStorage" value="0" required id="id_totalStorage"></td></tr>
             <input class="marginFormTable" type="hidden" name="csrfmiddlewaretoken" value="iQnosrYY6QhknWLKwxwCz7WawWhj0RUeoAqlaQSB6kBtivQ3grJVWmMo2bhfolaH">
           </table>
+          
         <button type="submit" class="btn btn-primary">Submit</button>
         </form>
           
@@ -171,12 +177,22 @@ Add new crop
         
             </div>
             <div class="col-3">
+
         <form action= "/management/crop/" method='post' >
-        {{ addCrop.as_p }}
+        <p><label for="id_selectCrop">SelectCrop:</label>
+         <select name="selectCrop" id="id_selectCrop">
+  
+  {% for i in cropRecord %}
+  <option value="{{i.crop_id}}">{{i.cropName}}</option>
+  {% endfor %}
+  
+
+</select></p>
         <label for="croparea">cropArea</label>
         <input type="number" name="croparea" /><br><br>
         {% csrf_token %}
-        <button type="submit" name="AddCropToRecord" value="{{recordsApproved.recordId}}" class="btn btn-primary">Add crop</button>
+        <input type="hidden" name="csrfmiddlewaretoken" value="i4eD5jgUUvM6ykM5wGU8h5L34cwHF1FjZVrkhUnL013OVC8JgzIEZbzwocZAtu8O">
+        <button type="submit" name="AddCropToRecord" value="38" class="btn btn-primary">Add crop</button>      
         </form>
         
         <h2>crops in this record</h2>
@@ -189,5 +205,5 @@ Add new crop
       </div>
     </main>
     {% endfor %}
-
+</div>
 {% endblock %}

@@ -143,8 +143,7 @@ def cropRecords(request,id):
     return render(request,'management/cropRecords.html',dict)
 
 
-def finance(request):
-    return render(request, 'management/base.html')
+
 
 def employeeRecords(request):
     employeeRecord = employee.objects.all()
