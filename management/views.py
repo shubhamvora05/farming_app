@@ -3,6 +3,7 @@ from user.models import UserRecord, ContactUs, userProfile,cropArea
 from management.models import employee,crop,seedsModel,pesticidesModel
 from django.contrib import messages
 from management.forms import EmployeeForm,CropForm,SeedsForm,PesticidesFrom,addCropToRecord
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 from django.http import HttpResponse
@@ -38,7 +39,7 @@ def cropRecord(request):
         form = CropForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.info(request, 'You have added new record successfully.')
+            messages.info(request, 'You have added new crop record successfully.')
             return redirect('/management/crop/')
 
     elif request.POST.get("AddCropToRecord"):
@@ -128,6 +129,9 @@ def cropRecords(request,id):
     if request.POST.get("RemoveCropToRecord"):
         ToHandle=UserRecord.objects.filter(recordId=request.POST.get("RemoveCropToRecord")).first()
         ToHandle.selectCrop.remove(id)
+        
+        cropArea.objects.filter(userRecord=ToHandle,crop=id).delete()
+        
         messages.info(request, 'You have Removed crop successfully from record.')
         return redirect('/management/crop/cropRecords/'+str(id))
             
@@ -162,3 +166,5 @@ def employeeRecords(request):
 def employeeProfile(request,id):
     employeeId = employee.objects.filter(employee_id=id)
     return render(request,'management/employeeProfile.html',{'emid':employeeId[0]})
+
+

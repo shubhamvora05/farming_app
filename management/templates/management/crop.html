@@ -127,7 +127,7 @@ Add new crop
             <input class="marginFormTable" type="hidden" name="csrfmiddlewaretoken" value="iQnosrYY6QhknWLKwxwCz7WawWhj0RUeoAqlaQSB6kBtivQ3grJVWmMo2bhfolaH">
           </table>
           
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" name="AddNewCrop" value="1" class="btn btn-primary">Submit</button>
         </form>
           
       </div>
@@ -192,7 +192,7 @@ Add new crop
         <input type="number" name="croparea" /><br><br>
         {% csrf_token %}
         <input type="hidden" name="csrfmiddlewaretoken" value="i4eD5jgUUvM6ykM5wGU8h5L34cwHF1FjZVrkhUnL013OVC8JgzIEZbzwocZAtu8O">
-        <button type="submit" name="AddCropToRecord" value="38" class="btn btn-primary">Add crop</button>      
+        <button type="submit" name="AddCropToRecord" value="{{recordsApproved.recordId}}" class="btn btn-primary">Add crop</button>      
         </form>
         
         <h2>crops in this record</h2>
