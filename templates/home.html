@@ -3,7 +3,7 @@
 
 {% block style %}
 body {
-     background-image:url("{%static 'user/head.jpg' %}");
+   background-image: url("{%static 'user/farm.jpg' %}");
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -14,18 +14,22 @@ body {
 
 
 div.userbackground {
-        background-image: url("{%static 'user/farm.jpg' %}");
      background-size: 400px 300px;
     background-repeat: no-repeat;
- opacity: 1;
+
 }
 div.userbackground:hover{
 -webkit-transform: scale(1.2);
 -ms-transform: scale(1.2);
 transform: scale(1.2);
 transition: 0.5s ease;
+background-color:#DAF7A6;
+ opacity: 0.5;
 }
 .divuser{
+border-radius: 6px 6px 6px 6px;
+border-color: white;
+border-style: solid;
   height:300px;
   width:400px;
   text-align: center;
@@ -38,10 +42,9 @@ transition: 0.5s ease;
 
 
 div.departmentbackground {
-       background:#302C2C;
+
      background-size: 400px 300px;
  background-repeat: no-repeat;
-   background-image: url("{%static 'user/department.jpg' %}");
      opacity: 0.8;
 
 }
@@ -50,9 +53,14 @@ div.departmentbackground:hover{
 -ms-transform: scale(1.2);
 transform: scale(1.2);
 transition: 0.5s ease;
+background-color:#DAF7A6;
+ opacity: 0.5;
 }
 .divdepartment{
-  height:300px;
+border-color: white;
+border-style: solid;
+border-radius: 6px 6px 6px 6px;
+height:300px;
   width:400px;
     text-align: center;
     padding-top: 110px;
@@ -62,7 +70,10 @@ transition: 0.5s ease;
     font-size:40px;
 }
 
-
+.bg-dark {
+    background-color: #343a40!important;
+     opacity: 0.5;
+}
 
 .text{
     color:white;
@@ -75,18 +86,25 @@ transition: 0.5s ease;
 
 
 @media only screen and (max-width:650px){
+body {
+   background-image: url("{%static 'user/userNotAuth1.jpg' %}");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
 .mt-5, .my-5 {
     margin-top: 6rem!important;
 }
 div.userbackground {
      background-size: 300px 200px;
 }
-.divuser{
-  height:200px;
-  width:300px;
-  text-align: center;
-     padding-top: 70px;
-    font-size:25px;
+.divuser {
+    height: 200px;
+    width: 300px;
+    text-align: center;
+    padding-top: 70px;
+    font-size: 25px;
+    margin-top: -20px;
 }
 
 div.departmentbackground {
