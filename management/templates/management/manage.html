@@ -27,7 +27,7 @@
     -webkit-box-flex: 1;
     -ms-flex-positive: 1;
     flex-grow: 1;
-    max-width: 30%;
+    max-width: 100%;
 }
 
 .col-6 {
@@ -35,6 +35,220 @@
     -ms-flex: 0 0 50%;
     flex: 0 0 70%;
     max-width: 100%;
+}
+.col-3 {
+-webkit-box-flex: 0;
+-ms-flex: 0 0 25%;
+flex: 0 0 29%;
+max-width: 17.8%;
+}
+
+.mt-3, .my-3 {
+margin-top: 1rem!important;
+margin-bottom: 10px;
+}
+
+.jumbotron {
+padding: 1rem 1rem;
+}
+.col {
+-ms-flex-preferred-size: 0;
+flex-basis: 0;
+-webkit-box-flex: 1;
+-ms-flex-positive: 1;
+flex-grow: 1;
+max-width: 100%;
+}
+
+.col-6 {
+-webkit-box-flex: 0;
+-ms-flex: 0 0 50%;
+flex: 0 0 70%;
+max-width: 100%;
+}
+.align-text{
+    text-align: center;
+}
+.align-text-table{
+ text-align: left;
+}
+.input-width{
+width:200px;
+}
+
+
+
+.divnotauth {
+    background-color: #424767;
+color:#eeeeee;
+text-align: center;
+width: 100%;
+margin: auto;
+height: 300px;
+padding-top: 20px;
+}
+.hw{
+width:300px;
+height:230px;
+}
+#divrow{
+text-align:center;
+}
+.h5login{
+margin-top:20px;
+}
+.h2login{
+margin-top:0px;
+}
+@media only screen and (max-width:1350px){
+.hw{
+width:250px;
+height:180px;
+}
+}
+@media only screen and (max-width:1200px){
+.hw{
+width:400px;
+height:330px;
+}
+#divrow{
+text-align:center;
+}
+}
+#backgroundDivPending{
+background:#bbe1fa;
+margin-bottom: 1rem;
+}
+#backgroundDivApproved{
+background:#bbe1fa;
+margin-bottom: 1rem;
+}
+#backgroundDivRejected{
+background:#bbe1fa;
+margin-bottom: 1rem;
+}
+.myNewRequest{
+-webkit-box-flex: 0;
+margin-right:7px;
+-ms-flex: 0 0 25%;
+}
+.approvRejected {
+padding-left: 135px;
+padding-bottom: 0.2px;
+margin-bottom: 10px;
+}
+.vbtn{
+background:blue;
+}
+@media only screen and (max-width:1000px){
+.myNewRequest {
+-webkit-box-flex: 0;
+margin-left: 14px;
+-ms-flex: 0 0 25%;
+}
+.h5login{
+margin-top:20px;
+font-size:15px;
+}
+.h3Size{
+font-size: 20px;
+}
+.approvRejected {
+padding-left: 90px;
+padding-bottom: 0.2px;
+margin-bottom: 10px;
+}
+.hw{
+width:330px;
+height:260px;
+}
+#divrow{
+text-align:center;
+}
+}
+
+@media only screen and (max-width:750px){
+.approvRejected {
+padding-left: 40px;
+padding-bottom: 0.2px;
+margin-bottom: 10px;
+}
+.h2login{
+font-size:20px;
+}
+.h5login{
+margin-top:20px;
+font-size:12px;
+}
+.divnotauth{
+height:260px;
+}
+.hw{
+width:270px;
+height:200px;
+}
+.h3SizeApprovRejected{
+font-size: 20px;
+}
+.h5SizeApprovRejected{
+font-size: 15px;
+}
+}
+
+@media only screen and (max-width:650px){
+#backgroundDivPending {
+background: #bbe1fa;
+margin-bottom: 1rem;
+text-align: center;
+}
+#backgroundDivApproved{
+background:#bbe1fa;
+margin-bottom: 1rem;
+text-align: center;
+}
+#backgroundDivRejected{
+background:#bbe1fa;
+margin-bottom: 1rem;
+text-align: center;
+}
+.leftText {
+text-align: left;
+margin-left: 13px;
+margin-top:10px;
+}
+#max-width{
+max-width: 100%;
+}
+.h3Size {
+font-size: 15px;
+}
+.approvRejected {
+padding-left: 20px;
+padding-bottom: 0.2px;
+margin-bottom: 10px;
+}
+.divnotauth {
+color:#eeeeee;
+text-align: center;
+width: 100%;
+margin: auto;
+padding-top: 20px;
+font-size:15px;
+}
+.h2login{
+font-size:20px;
+}
+.h5login{
+margin-top:20px;
+font-size:12px;
+}
+.divnotauth{
+height:300px;
+}
+.hw{
+width:320px;
+height:200px;
+}
 }
 {% endblock %}
 
@@ -46,7 +260,9 @@
 <div class="container mt-3">
   <div class="row">
     <div class="col-9 mr-auto">
-      <h3>Your all pending service are here</h3>
+     {% if recordsPending %}
+            <h3 class="h3Size">Your all pending service are here</h3>
+        {% endif %}
     </div>
     </div>
   </div>
@@ -56,14 +272,14 @@
 
 
  {% for recordsPending in recordsPending %}
-    <main role="main" class="container">
-      <div class="jumbotron">
+      <main role="main" class="container">
+      <div id="backgroundDivPending" class="jumbotron">
         <div class="container">
   <div class="row">
-    <div class="col-4">
+    <div class="col">
       <img src="/media/{{recordsPending.farmImage}}" width="280px" height="260px"  alt="">
     </div>
-    <div class="col-4">
+    <div class="leftText col">
         <h3>{{recordsPending.name}}</h3>
         <h5>mobile No: {{recordsPending.mobileNo}}</h5>
         <h5>Address: {{recordsPending.farmaddress}}</h5>
@@ -71,37 +287,39 @@
         <h5>soilType: {{recordsPending.soilType}}</h5>
         <h5>MonyeyDemand: {{recordsPending.moneyDemand}}</h5>
         <h5>Comment: {{recordsPending.extraComment}}</h5>
-            </div>
-    <div class="col-4">
+            </div><br>
+    <div class="col-4"><br>
     <form action="/management/manage" method="post">
-    {% csrf_token %}
+    {% csrf_token %}<br>
     <button type="submit" name="Approve"value="{{recordsPending.recordId}}" class="btn btn-success">Approve</button><br><br>
     <button type="submit" name="Reject"value="{{recordsPending.recordId}}" class="btn btn-danger">Reject</button>
     </form>
-    
+
     </div>
           </div>
         </div>
       </div>
     </main>
     {% endfor %}
-    
+
    <!--all approved record showing-->
 
-    <div>
-      <h3>Your all approved service are here.</h3>
-      <h5>we will looke at them.</h5>
+     <div class="approvRejected">
+{% if recordsApproved %}
+      <h3 class="h3SizeApprovRejected" >Your all approved service are here.</h3>
+      <h5 class="h5SizeApprovRejected">we will looke at them.</h5>
+{% endif %}
     </div>
 
     {% for recordsApproved in recordsApproved %}
     <main role="main" class="container">
-      <div class="jumbotron">
+      <div id="backgroundDivApproved" class="jumbotron">
         <div class="container">
   <div class="row">
     <div class="col">
       <img src="/media/{{recordsApproved.farmImage}}" width="280px" height="260px"  alt="">
     </div>
-    <div class="col-6">
+    <div class="leftText col">
         <h3>{{recordsApproved.name}}</h3>
         <h5>mobile No: {{recordsApproved.mobileNo}}</h5>
         <h5>Address: {{recordsApproved.farmaddress}}</h5>
@@ -117,21 +335,23 @@
     {% endfor %}
 
     <!--showing all rejected records here-->
- <div>
-      <h3>Your all rejected service are here.</h3>
-      <h5>You can apply again for this one after some changes</h5>
+ <div class="approvRejected">
+     {% if recordsRejected %}
+      <h3 class="h3SizeApprovRejected">Your all rejected service are here.</h3>
+      <h5 class="h5SizeApprovRejected">You can apply again for this one after some changes</h5>
+     {% endif %}
     </div>
-  
-  
+
+
 {% for recordsRejected in recordsRejected %}
     <main role="main" class="container">
-      <div class="jumbotron">
+      <div id="backgroundDivRejected" class="jumbotron">
         <div class="container">
   <div class="row">
     <div class="col">
       <img src="/media/{{recordsRejected.farmImage}}" width="280px" height="260px"  alt="">
     </div>
-    <div class="col-6">
+    <div class="leftText col">
         <h3>{{recordsRejected.name}}</h3>
         <h5>mobile No: {{recordsRejected.mobileNo}}</h5>
         <h5>Address: {{recordsRejected.farmaddress}}</h5>
@@ -139,7 +359,7 @@
         <h5>soilType: {{recordsRejected.soilType}}</h5>
         <h5>MonyeyDemand: {{recordsRejected.moneyDemand}}</h5>
         <h5>Comment: {{recordsRejected.extraComment}}</h5>
-            </div>
+         </div>
           </div>
         </div>
       </div>
