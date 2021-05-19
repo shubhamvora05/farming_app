@@ -118,22 +118,22 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
+<!-- Include the above in your HEAD tag -->
 
 <div class="container emp-profile">
             <form method="post">
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
-                            <img src="/media/{{emid.profileImage}}" width="200px" height="200px"  alt="" class="employeeProfile">
+                            <img src="/media/{{emid.profileImage}}" width="200px" height="200px"  style="border:2px solid blue;" alt="{{emid.name}}" class="employeeProfile">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="profile-head">
-                                    <h5>
+                                    <h3 style="margin-top:30px;">
                                          {{emid.name}}
-                                    </h5>
-                                    <h6>
+                                    </h3>
+                                    <h6 style="margin-bottom:-40px;">
                                         {{emid.departmentType}}
                                     </h6>
                                     <p class="proile-rating"> <span>  <br> <br></span></p>

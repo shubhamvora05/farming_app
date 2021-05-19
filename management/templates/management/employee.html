@@ -3,10 +3,7 @@
 {% block style %}
 
 <!--css for add new employee button-->
-body {
-    background-color: lightblue;
-    min-height: 100vh;
-}
+
 .addMore{
   border: none;
   width: 62px;
@@ -27,14 +24,12 @@ body {
     display: flex;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
-    margin-top: 10px;
-    padding-left: 50px;
+    margin:30px 5% 0;
+    
 }
-.employeeProfile{
-  border-radius: 50%;
-}
+
 .containerImg {
-    max-width: 1140px;
+    max-width: 1340px;
     margin-top: 20px;
      margin-left: 120px;
     padding-top: 30px;
@@ -58,6 +53,7 @@ body {
     flex-wrap: wrap;
     margin-right: -15px;
     margin-left: 30px;
+    margin-top:50px;
 }
 .colImg {
     -ms-flex-preferred-size: 0;
@@ -65,8 +61,8 @@ body {
     -webkit-box-flex: 1;
     -ms-flex-positive: 1;
     flex-grow: 1;
-    padding: 25px;
-    background: aliceblue;
+    padding: 20px;
+    background: lightblue;
     max-width: 21%;
     margin-right: 40px;
 }
@@ -86,6 +82,7 @@ body {
 .buttonReadMore2 {
     background-color: unset;
     color: black;
+    margin-top:20px;
     border: 2px solid #008CBA;
 }
 
@@ -93,13 +90,15 @@ body {
   background-color: #008CBA;
   color: white;
 }
+
 {% endblock %}
 
 {% block body %}
+
 <div class="container mt-3">
   <div class="rowHead">
     <div class="col-9 mr-auto">
-      <h3 style="color:#005ce6;font-size: 250%;">Employee List</h3>
+      <h3 style="color:black;font-size: 250%;">Employee List</h3>
     </div>
     <div class="col-3 ml-auto">
 <button type="button" class="btn btn-success mr-2 addMore " title="Add new Employee" style="border-radius:50%; width:60px;height:60px;"  data-toggle="modal" data-target="#RecordModal">
@@ -200,20 +199,24 @@ body {
   </div>
 </div>
 
+<!--employee records-->
+
 <div class="containerImg">
   <div class="rowInFor">
     {% for x in employeeRecord %}
     <div class="colImg">
-    <img src="/media/{{x.profileImage}}" width="50px" height="50px"  alt="x.name" class="rounded-circle employeeProfile">
+      <center><img src="/media/{{x.profileImage}}" width="100px" height="100px"  alt="x.name" class="rounded-circle ">
       <br><br>
-        <center><b>{{x.name}}</b><br>
+        <b style="font-size:1.4rem;">{{x.name}}</b><br>
         {{x.departmentType}}<br>
-        <a href="{{x.employee_id}}"> <button id="{{x.employee_id}}" class="buttonReadMore buttonReadMore2">Read More Details</button></a></center>
+        <a href="{{x.employee_id}}"> <button id="{{x.employee_id}}" class="buttonReadMore buttonReadMore2">About {{x.name}}</button></a></center>
     </div>
     {% if forloop.counter|divisibleby:4%}
-    </div> <div class="rowInFor">
+    </div> 
+    <div class="rowInFor">
     {% endif %}
     {% endfor %}
   </div>
 </div>
+
 {% endblock %}

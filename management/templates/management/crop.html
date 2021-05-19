@@ -27,16 +27,13 @@
     display: flex;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
-    margin-right: 15px;
-    margin-left: 15px;
+    margin:10px 15px;
+    
 }
 .containerCrop {
     max-width: 100%;
 }
-body {
-    
-    
-}
+
 .bdy{
     background: Gainsboro;
     margin: 10px 7%;
@@ -58,6 +55,7 @@ body {
     background-color: unset;
     color: black;
     border: 2px solid #008CBA;
+    background-color:lightblue
 }
 
 .buttonReadMore2:hover {
@@ -66,7 +64,7 @@ body {
 }
 .h3Crop{
     font-size: 1.75rem;
-    color: blue;
+    color: black;
 }
 {% endblock %}
 
@@ -140,9 +138,9 @@ Add new crop
   <div class="rowCrop">
       {% for x in cropRecord %}
       <div class="colCrop">
-          <center><b><h4>{{x.cropName}}</h4></b>{{x.cropSeason}}
-          <a href="{{x.crop_id}}"> <button id="{{x.crop_id}}" class="buttonReadMore buttonReadMore2">Seeds and pesticides</button></a>
-          <a href="cropRecords/{{x.crop_id}}"> <button id="{{x.crop_id}}" class="buttonReadMore buttonReadMore2">Crop records</button></a></center>
+          <center><b><h4 style="color:blue;margin-bottom:14px;">{{x.cropName}}</h4></b>{{x.cropSeason}}
+          <a href="{{x.crop_id}}"> <button id="{{x.crop_id}}" style="margin:17px 3px 2px;" class="buttonReadMore buttonReadMore2">Seeds and pesticides</button></a>
+          <a href="cropRecords/{{x.crop_id}}"> <button id="{{x.crop_id}}" style="margin:5px 3px;"class="buttonReadMore buttonReadMore2">records of {{x.cropName}}</button></a></center>
 
       </div>
       {% if forloop.counter|divisibleby:5%}
@@ -156,7 +154,7 @@ Add new crop
 <!--showing records to select a crop-->
 
 <br><br><br>
-<h3>select crop in all approve records</h3>
+<h3 style="margin:-20px 0 40px 70px;">select crop in all approve records</h3>
 
 {% for recordsApproved,l in mylist%}
     <main role="main" class="container">
