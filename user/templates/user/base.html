@@ -30,6 +30,12 @@ background: white;
 /* background: no-repeat center center; */
 background-size: 100% 100%;
 }
+.align-center{
+text-align:center;
+}
+.align-left{
+    text-align: left;
+}
 #navbar-toggler1 {
     line-height: 0.3;
     padding-bottom: 10px;
@@ -132,29 +138,29 @@ SignUp
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body align-center">
         <form action= "/user/signup" method='post'>
-  <div class="form-group">
+  <div class="form-group align-left">
     <label for="username">Username</label>
     <input type="text" class="form-control" id="username" name="username" placeholder="Choose a unique username">
   </div>
-  <div class="form-group">
+  <div class="form-group align-left">
     <label for="fname">First Name</label>
     <input type="text" class="form-control" id="fname" name="fname" placeholder="Enter Your First Name">
   </div>
-  <div class="form-group">
+  <div class="form-group align-left">
     <label for="lname">Last Name</label>
     <input type="text" class="form-control" id="lname" name="lname" placeholder="Enter Your Last Name">
   </div>
-  <div class="form-group">
+  <div class="form-group align-left">
     <label for="email">Email address</label>
     <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
   </div>
-  <div class="form-group">
+  <div class="form-group align-left">
     <label for="pass1">Choose a password</label>
     <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Choose Your Password">
   </div>
-  <div class="form-group">
+  <div class="form-group align-left">
     <label for="pass2">Confirm Password</label>
     <input type="password" class="form-control" id="pass2" name="pass2" placeholder="Enter your password again">
   </div>
@@ -184,13 +190,13 @@ SignUp
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body align-center">
         <form action= "/user/login" method='post'>
-  <div class="form-group">
+  <div class="form-group align-left">
     <label for="username">Username</label>
     <input type="text" class="form-control" id="loginusername" name="loginusername" placeholder="Choose a unique username">
   </div>
-  <div class="form-group">
+  <div class="form-group align-left">
     <label for="pass">Enter your password </label>
     <input type="password" class="form-control" id="loginpassword" name="loginpassword" placeholder="Enter your password ">
   </div>
