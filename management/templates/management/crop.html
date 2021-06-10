@@ -1,22 +1,15 @@
 {% extends "management/base.html" %}
 
 {% block style %}
-.rowHead {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    margin-right: -150px;
-    margin-bottom: 10px;
-}
+
 .colCrop {
+    width: 208px;
     -ms-flex-preferred-size: 0;
-    flex-basis: 0;
-    -webkit-box-flex: 1;
+    /* flex-basis: 0; */
+    /* -webkit-box-flex: 1; */
     -ms-flex-positive: 1;
-    flex-grow: 1;
-    max-width: 19%;
+    /* flex-grow: 1; */
+    /* max-width: 19%; */
     background: whitesmoke;
     padding: 10px;
     margin: 5px;
@@ -28,7 +21,7 @@
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     margin:10px 15px;
-    
+
 }
 .containerCrop {
     max-width: 100%;
@@ -73,11 +66,11 @@
 {% block body %}
 <div class="bdy">
 <div class="container mt-3">
-  <div class="rowHead">
-    <div class="col-9 mr-auto">
+  <div class="row">
+    <div class="col-10.5 mr-auto">
       <h3 class="h3Crop" >Crop List</h3>
     </div>
-    <div class="col-3 ml-auto">
+    <div class="col-1.5">
 <button type="button" class="btn mr-2 " style="background-color:lightblue" data-toggle="modal" data-target="#RecordModal">
 Add new crop
 </button>
@@ -95,10 +88,10 @@ Add new crop
         </button>
       </div>
       <div class="modal-body">
-          
+
 <!--Add new crop Form-->
-          
-           <form action= "/management/crop/" method='post' enctype="multipart/form-data"> 
+
+           <form action= "/management/crop/" method='post' enctype="multipart/form-data">
            {% csrf_token %}
             <table>
             <tr><th><label for="id_cropName">CropName:</label></th><td>
@@ -124,10 +117,10 @@ Add new crop
 <tr><th><label for="id_totalStorage">TotalStorage:</label></th><td><input class="marginFormTable" type="number" name="totalStorage" value="0" required id="id_totalStorage"></td></tr>
             <input class="marginFormTable" type="hidden" name="csrfmiddlewaretoken" value="iQnosrYY6QhknWLKwxwCz7WawWhj0RUeoAqlaQSB6kBtivQ3grJVWmMo2bhfolaH">
           </table>
-          
+
         <button type="submit" name="AddNewCrop" value="1" class="btn btn-primary">Submit</button>
         </form>
-          
+
       </div>
     </div>
   </div>
@@ -161,10 +154,10 @@ Add new crop
       <div class="jumbotron">
         <div class="container">
   <div class="row">
-    <div class="col-3">
+    <div class="col-lg-3">
       <img src="/media/{{recordsApproved.farmImage}}" width="200px" height="180px"  alt="">
     </div>
-    <div class="col-6">
+    <div class="col-lg-6">
         <h3>{{recordsApproved.name}}</h3>
         <h5>mobile No: {{recordsApproved.mobileNo}}</h5>
         <h5>Address: {{recordsApproved.farmaddress}}</h5>
@@ -172,9 +165,9 @@ Add new crop
         <h5>soilType: {{recordsApproved.soilType}}</h5>
         <h5>MonyeyDemand: {{recordsApproved.moneyDemand}}</h5>
         <h5>Comment: {{recordsApproved.extraComment}}</h5>
-        
+
             </div>
-            <div class="col-3">
+            <div class="col-lg-3">
 
         <form action= "/management/crop/" method='post' >
         <p><label for="id_selectCrop">SelectCrop:</label>

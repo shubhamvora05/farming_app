@@ -51,12 +51,13 @@
     max-width: 100%;
 }
 .colCrop {
-    -ms-flex-preferred-size: 0;
-    flex-basis: 0;
-    -webkit-box-flex: 1;
+       -ms-flex-preferred-size: 0;
+    /* flex-basis: 0; */
+    width: 185px;
+    /* -webkit-box-flex: 1; */
     -ms-flex-positive: 1;
-    flex-grow: 1;
-    max-width: 22%;
+    /* flex-grow: 1; */
+    /* max-width: 22%; */
     background: whitesmoke;
     padding: 10px;
     margin: 7px;
@@ -83,29 +84,26 @@
 <div class="mt-3" style="max-width:50%;text-align:center;margin:0 auto;">
 <center><h1 style="color:blue;">{{cropId.cropName}}</h1></center>
 <hr>
-   
+
           <div class="row" style="margin:10px auto;">
-            <div class="col-6" style="padding-left:50px;" >
-            <p style="font-size:18px"><b>Crop Type:</b></p>
-        <p style="font-size:18px"><b>Crop Season:</b></p>
-        <p style="font-size:18px"><b>Crop Storage:</b></p>
-            </div>
-            <div class="col-6" style="padding-left:50px;">
-              <p style="font-size:18px">{{cropId.cropType}}</p>
-        <p style="font-size:18px">{{cropId.cropSeason}}</p>
-        <p style="font-size:18px">{{cropId.totalStorage}}</p>
-            </div>
-        
+            <div class="col-lg-6" style="padding-left:50px;" ><p style="font-size:18px"><b>Crop Type: </b></p></div>
+              <div class="col-lg-6">{{cropId.cropType}}</div>
+
+               <div class="col-lg-6" style="padding-left:50px;" ><p style="font-size:18px"><b>Crop Season:</b></p></div>
+              <div class="col-lg-6">{{cropId.cropSeason}}</div>
+
+               <div class="col-lg-6" style="padding-left:50px;" ><p style="font-size:18px"><b>Crop Storage:</b></p></div>
+              <div class="col-lg-6">{{cropId.totalStorage}}</div>
             </div>
     </div>
 
 <! –– Seeds details ––>
 <div class="container mt-3">
-  <div class="rowHead">
-    <div class="colY">
+  <div class="row">
+    <div class="col-lg-10 col-md-12">
       <h3 class="h3Crop" >Seeds brands for {{cropId.cropName}}</h3>
     </div>
-    <div class="addButton">
+    <div class="col-2">
 <button type="button" class="btn btn-success mr-2 " data-toggle="modal" data-target="#RecordModal">
 Add new Seeds
 </button>
@@ -128,11 +126,11 @@ Add new Seeds
 
 <! –– pesticides details ––>
 <div class="container mt-3">
-  <div class="rowHead">
-    <div class="colY">
+  <div class="row">
+    <div class="col-lg-10 col-md-12">
       <h3 class="h3Crop" >Pesticides brands for {{cropId.cropName}}</h3>
     </div>
-    <div class="addButton2">
+    <div class="col-2">
 <button type="button" class="btn btn-success mr-2 " data-toggle="modal" data-target="#RecordModal1">
 Add new Pesticides
 </button>
